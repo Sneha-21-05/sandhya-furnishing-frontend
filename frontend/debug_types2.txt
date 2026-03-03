@@ -1,0 +1,21 @@
+TYPES:
+694648303390f1b1e73f56ac | American curtains  | Cat: 6946458de031675cc1272781
+694661d8b2a90773ae818c2b | rec linear | Cat: 694661b6b2a90773ae818c25
+6946b4437522c1e3d7c0aac7 | fly | Cat: 6946b25220b89ed2d570cf76
+695011d4d4275b480d8086e2 | American Curtain  | Cat: 69501140d4275b480d8085c4
+69516c17b5fa27ec0f4701e3 | American Curtains | Cat: 695168d0203be47dd3814ca6
+695377ecb7fa8ec740673c87 | normal sofa  | Cat: 69516b059b1b9d7ac747eb13
+69538199b7fa8ec740673f2d | normal1 | Cat: 69516b059b1b9d7ac747eb13
+6957df3eedcfa4d2f0b0d56b | Walnut Wood Flooring | Cat: 6957dd8bedcfa4d2f0b0d27f
+6957eba7edcfa4d2f0b0e190 | American Walnut Flooring | Cat: 6957dd8bedcfa4d2f0b0d27f
+698c9565c7f46465b25ba118 | 3 seater | Cat: 698c954ac7f46465b25ba0b2
+698cbcd2946ea410e54b111a | 3 fold | Cat: 698cbcaa946ea410e54b10a4
+698cbcfd946ea410e54b1191 | single door | Cat: 698cadeb4b8a9b1b4d5bf5d5
+6991ed35270a0c2ce7586ffd | 3 Seater | Cat: 69516b059b1b9d7ac747eb13
+699305420b044b5e14ff7664 | 1 seater | Cat: 69516b059b1b9d7ac747eb13
+699314106aa48fd669ad9acf | 5 Seater | Cat: 69516b059b1b9d7ac747eb13
+69946455258c1797fdedbf52 | Eyelet | Cat: 695168d0203be47dd3814ca6
+69946d48258c1797fdedbf6b | Door Curtains | Cat: 695168d0203be47dd3814ca6
+69947380258c1797fdedc040 | Sheer Curtains | Cat: 695168d0203be47dd3814ca6
+699478cb258c1797fdedc0d5 | Tissue | Cat: 695168d0203be47dd3814ca6
+69a41c639a818bfb6fcee046 | Sofa Set  | Cat: 698c954ac7f46465b25ba0b2
