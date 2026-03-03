@@ -1,0 +1,50 @@
+TYPES:
+694648303390f1b1e73f56ac American curtains 
+694661d8b2a90773ae818c2b rec linear
+6946b4437522c1e3d7c0aac7 fly
+695011d4d4275b480d8086e2 American Curtain 
+69516c17b5fa27ec0f4701e3 American Curtains
+695377ecb7fa8ec740673c87 normal sofa 
+69538199b7fa8ec740673f2d normal1
+6957df3eedcfa4d2f0b0d56b Walnut Wood Flooring
+6957eba7edcfa4d2f0b0e190 American Walnut Flooring
+698c9565c7f46465b25ba118 3 seater
+698cbcd2946ea410e54b111a 3 fold
+698cbcfd946ea410e54b1191 single door
+6991ed35270a0c2ce7586ffd 3 Seater
+699305420b044b5e14ff7664 1 seater
+699314106aa48fd669ad9acf 5 Seater
+69946455258c1797fdedbf52 Eyelet
+69946d48258c1797fdedbf6b Door Curtains
+69947380258c1797fdedc040 Sheer Curtains
+699478cb258c1797fdedc0d5 Tissue
+69a41c639a818bfb6fcee046 Sofa Set 
+69a41c8e9a818bfb6fcee04e Sofa Set
+PRODUCTS:
+Rod Pocket Curtains 69516c17b5fa27ec0f4701e3
+simple  695377ecb7fa8ec740673c87
+Engineered American Black walnut wood Flooring 6957eba7edcfa4d2f0b0e190
+Engineered American Black walnut wood Flooring 6957eba7edcfa4d2f0b0e190
+Sleepyhead 698c9565c7f46465b25ba118
+Sleepyhead 699305420b044b5e14ff7664
+Sleepyhead 6991ed35270a0c2ce7586ffd
+In the Box 6991ed35270a0c2ce7586ffd
+In the Box 699314106aa48fd669ad9acf
+Imroz 699314106aa48fd669ad9acf
+Home Sizzler 69946d48258c1797fdedbf6b
+Jvin Fab 69947380258c1797fdedc040
+Jvin Fab 69947380258c1797fdedc040
+Parda 699478cb258c1797fdedc0d5
+Arick Home 69946455258c1797fdedbf52
+Stamen 69946455258c1797fdedbf52
+Fashion String 213 cm (7 ft) Door Polyester Semi-Transparent Curtain (Pack of 3) 69946455258c1797fdedbf52
+Saral Home 213 cm (7 ft) Door Cotton Room Darkening Curtain (Pack of 2) 69946455258c1797fdedbf52
+Saral Home 213 cm (7 ft) Door Cotton Room Darkening Curtain (Pack of 2) 69946455258c1797fdedbf52
+Comfy Home 213.3 cm (7 ft) Door Silk Blackout Curtain (Pack of 2) 69516c17b5fa27ec0f4701e3
+Qsted 150 cm (5 ft) Window Polyester Blackout Curtain (Pack of 2) 69516c17b5fa27ec0f4701e3
+Qsted 150 cm (5 ft) Window Polyester Blackout Curtain (Pack of 2) 69516c17b5fa27ec0f4701e3
+Linenwalas 243 cm (8 ft) Cotton Transparent Curtain (Pack of 2) Brand: Linenwalas 69516c17b5fa27ec0f4701e3
+Linenwalas 213 cm (7 ft) Cotton Semi-Transparent Curtain (Pack of 2) 69516c17b5fa27ec0f4701e3
+Decorwood Solid Sheesham Wood 3+2+1 Sofa Set 69a41c639a818bfb6fcee046
+Decorwood Solid Sheesham Wood 7 Seater Sofa Set (3+2+2) 69a41c639a818bfb6fcee046
+Shree Jeen Mata Enterprises Solid Sheesham Wood 3+1 Sofa Set 69a41c639a818bfb6fcee046
