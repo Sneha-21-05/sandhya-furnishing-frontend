@@ -34,12 +34,10 @@ const Login = () => {
 
         console.log("Logged in user:", res.data.user);
 
-        // 🔥 ROLE CHECK
         if (res.data.user.role === "admin") {
           navigate("/admin", { replace: true });
         } else {
-          // 🔥 Redirect back to where user came from
-          window.location.href = "/user/dashboard";
+          navigate("/user/dashboard", { replace: true });
         }
 
       } else {
