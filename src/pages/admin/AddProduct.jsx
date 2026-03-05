@@ -161,20 +161,25 @@ const AddProduct = () => {
       setPillowFabric(p.extraFields?.fabricMaterial || "");
       setPillowFilling(p.extraFields?.fillingMaterial || "");
       setPillowDimensions(p.extraFields?.dimensions || "");
-      
+
       // NOTE: curtain extra note uses a separate field in state,
       // but DB uses same key "extraNote"
       setCurtainExtraNote(p.extraFields?.extraNote || "");
 
       // IMAGES
+      const getImageUrl = (url) => {
+        if (!url) return "";
+        if (url.startsWith("http")) return url;
+        if (url.startsWith("/uploads")) return `${BACKEND_URL}${url}`;
+        return `${BACKEND_URL}/uploads/${url}`;
+      };
+
       if (p.images) {
-        setImagePreviews(p.images.map((img) => `${BACKEND_URL}${img}`));
+        setImagePreviews(p.images.map(getImageUrl));
       }
 
       if (p.dimensionImages) {
-        setDimensionPreviews(
-          p.dimensionImages.map((img) => `${BACKEND_URL}${img}`)
-        );
+        setDimensionPreviews(p.dimensionImages.map(getImageUrl));
       }
     };
 
@@ -321,6 +326,21 @@ const AddProduct = () => {
       );
     }
 
+    // Append existing images that haven't been deleted
+    const getExistingFromPreviews = (previews) => {
+      // Return strings that look like backend URLs (not Object URLs)
+      return previews
+        .filter(url => url.startsWith("http"))
+        .map(url => url.replace(BACKEND_URL, ""));
+    };
+
+    const existingImages = getExistingFromPreviews(imagePreviews);
+    const existingDimensionImages = getExistingFromPreviews(dimensionPreviews);
+
+    formData.append("existingImages", JSON.stringify(existingImages));
+    formData.append("existingDimensionImages", JSON.stringify(existingDimensionImages));
+
+    // Append newly added files
     images.forEach((file) => formData.append("images", file));
     dimensionImages.forEach((file) =>
       formData.append("dimensionImages", file)

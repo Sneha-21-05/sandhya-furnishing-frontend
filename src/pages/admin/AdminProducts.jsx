@@ -108,10 +108,16 @@ const AdminProducts = () => {
                   filteredProducts.map((p) => (
                     <tr key={p._id} className="hover:bg-slate-50/50 transition-colors">
                       <td className="px-6 py-4">
-                        {p.image_url ? (
+                        {p.images && p.images.length > 0 ? (
                           <div className="w-14 h-14 rounded-lg overflow-hidden border border-gray-200 bg-white">
                             <img
-                              src={`https://sandhya-furnishing-backend.onrender.com${p.image_url}`}
+                              src={
+                                p.images[0].startsWith("http")
+                                  ? p.images[0]
+                                  : p.images[0].startsWith("/uploads")
+                                    ? `https://sandhya-furnishing-backend.onrender.com${p.images[0]}`
+                                    : `https://sandhya-furnishing-backend.onrender.com/uploads/${p.images[0]}`
+                              }
                               alt={p.name}
                               className="w-full h-full object-cover"
                             />
