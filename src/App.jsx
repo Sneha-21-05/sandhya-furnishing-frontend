@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {  Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 /* ================= USER PAGES ================= */
@@ -59,7 +59,7 @@ import Checkout from "./pages/user/Checkout";
 import AdminInquiryPremium from "./pages/admin/AdminInquiryPremium";
 function App() {
   return (
-    <BrowserRouter>
+    <>
 
       {/* USER POPUPS (Top Center) */}
       <Toaster
@@ -190,7 +190,7 @@ function App() {
         <Route path="/admin/inquiries/:id?" element={<AdminInquiryPremium />} />
 
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
