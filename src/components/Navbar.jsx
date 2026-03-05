@@ -15,7 +15,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <div className="flex items-center">
-          <NavLink to="/" className="text-2xl font-bold tracking-wide">
+          <NavLink to="/" end className="text-2xl font-bold tracking-wide">
             <span className="text-blue-500">Home</span> <span className="text-slate-300">Textile</span>
           </NavLink>
         </div>
