@@ -162,6 +162,16 @@ const AddProduct = () => {
       setPillowFilling(p.extraFields?.fillingMaterial || "");
       setPillowDimensions(p.extraFields?.dimensions || "");
 
+      // ========== CARPET FIELDS ==========
+      setCarpetType(p.extraFields?.carpetType || "");
+      setCarpetSize(p.extraFields?.size || "");
+      setCarpetWeight(p.extraFields?.weight || "");
+      setCarpetMaterial(p.extraFields?.material || "");
+      setCarpetWashType(p.extraFields?.washType || "");
+      setCarpetColorOptions(p.extraFields?.colorOptions || "");
+      setCarpetShape(p.extraFields?.shape || "");
+      setCarpetAdditionalNote(p.extraFields?.additionalNote || "");
+      
       // NOTE: curtain extra note uses a separate field in state,
       // but DB uses same key "extraNote"
       setCurtainExtraNote(p.extraFields?.extraNote || "");
