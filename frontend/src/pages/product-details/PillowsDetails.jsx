@@ -16,14 +16,9 @@ import { addToCart } from "../../api/cartApi";
 import toast from "react-hot-toast";
 
 /* IMAGE HELPER */
-const getImageUrl = (imageUrl) => {
-  if (!imageUrl) return null;
-
-  if (imageUrl.startsWith("http")) return imageUrl;
-  if (imageUrl.startsWith("/uploads"))
-    return `https://sandhya-furnishing-backend.onrender.com${imageUrl}`;
-
-  return `https://sandhya-furnishing-backend.onrender.com/uploads/${imageUrl}`;
+const getImageUrl = (url) => {
+  if (!url) return "";
+  return url;
 };
 
 const PillowsDetails = () => {
