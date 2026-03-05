@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import { Plus, Edit2, Trash2, Package } from "lucide-react";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
@@ -111,13 +112,7 @@ const AdminProducts = () => {
                         {p.images && p.images.length > 0 ? (
                           <div className="w-14 h-14 rounded-lg overflow-hidden border border-gray-200 bg-white">
                             <img
-                              src={
-                                p.images[0].startsWith("http")
-                                  ? p.images[0]
-                                  : p.images[0].startsWith("/uploads")
-                                    ? `https://sandhya-furnishing-backend.onrender.com${p.images[0]}`
-                                    : `https://sandhya-furnishing-backend.onrender.com/uploads/${p.images[0]}`
-                              }
+                              src={getImageUrl(p.images?.[0])}
                               alt={p.name}
                               className="w-full h-full object-cover"
                             />

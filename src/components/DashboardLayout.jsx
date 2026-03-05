@@ -11,11 +11,14 @@ import {
   Calendar
 } from "lucide-react";
 
+import { getImageUrl } from "../utils/imageUtils";
+
 const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const getProfileImageUrl = (img) => {
   if (!img) return "";
-  return `${BACKEND_URL}${img}?v=${Date.now()}`;
+  const resolvedUrl = getImageUrl(img);
+  return `${resolvedUrl}?v=${Date.now()}`;
 };
 
 const DashboardLayout = ({ children }) => {

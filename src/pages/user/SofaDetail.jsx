@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api";
 import { addToCart } from "../../api/cartApi";
 import toast from "react-hot-toast";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const SofaDetail = () => {
   const { id } = useParams();
@@ -61,10 +62,8 @@ const SofaDetail = () => {
         <img
           src={
             selectedColor?.images?.[0]
-              ? `https://sandhya-furnishing-backend.onrender.com/${selectedColor.images[0]}`
-              : product.images?.[0]
-              ? `https://sandhya-furnishing-backend.onrender.com${product.images[0]}`
-              : ""
+              ? getImageUrl(selectedColor.images[0])
+              : getImageUrl(product.images?.[0])
           }
           alt={product.name}
           className="w-full rounded-lg"
@@ -74,7 +73,7 @@ const SofaDetail = () => {
           {(selectedColor?.images || product.images || []).map((img, i) => (
             <img
               key={i}
-              src={`https://sandhya-furnishing-backend.onrender.com/${img}`}
+              src={getImageUrl(img)}
               alt=""
               className="w-16 h-16 object-cover rounded border cursor-pointer"
               onClick={() =>
@@ -107,11 +106,10 @@ const SofaDetail = () => {
                 <button
                   key={idx}
                   onClick={() => setSelectedColor(color)}
-                  className={`w-8 h-8 rounded-full border-2 ${
-                    selectedColor?.name === color.name
-                      ? "border-black"
-                      : "border-gray-300"
-                  }`}
+                  className={`w-8 h-8 rounded-full border-2 ${selectedColor?.name === color.name
+                    ? "border-black"
+                    : "border-gray-300"
+                    }`}
                   style={{ backgroundColor: color.hex || "#ccc" }}
                   title={color.name}
                 />

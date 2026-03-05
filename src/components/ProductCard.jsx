@@ -1,9 +1,8 @@
 import React from "react";
+import { getImageUrl } from "./utils/imageUtils";
 
 const ProductCard = ({ item }) => {
-  const imageSrc = item?.image_url
-    ? `https://sandhya-furnishing-backend.onrender.com${item.image_url}`
-    : "https://via.placeholder.com/300x200?text=No+Image";
+  const imageSrc = getImageUrl(item?.image_url);
 
   return (
     <div className="bg-gray-800 border border-gray-700 rounded-lg shadow p-4">

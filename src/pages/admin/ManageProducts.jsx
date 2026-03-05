@@ -4,6 +4,7 @@ import AdminLayout from "./AdminLayout";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Search, Filter, Plus, Edit2, Trash2, Package } from "lucide-react";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
@@ -154,7 +155,7 @@ const ManageProducts = () => {
                         {p.images?.length ? (
                           <div className="w-14 h-14 rounded-lg overflow-hidden border border-gray-200 bg-white">
                             <img
-                              src={`https://sandhya-furnishing-backend.onrender.com${p.images[0]}`}
+                              src={getImageUrl(p.images[0])}
                               alt={p.name}
                               className="w-full h-full object-cover"
                             />

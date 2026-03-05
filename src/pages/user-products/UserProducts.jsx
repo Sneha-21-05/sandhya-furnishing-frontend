@@ -9,9 +9,12 @@ import { addToCart } from "../../api/cartApi";
 /* ================= IMAGE URL HELPER ================= */
 const getImageUrl = (imageUrl) => {
   if (!imageUrl) return null;
-  if (imageUrl.startsWith("http")) return imageUrl;
-  if (imageUrl.startsWith("/uploads"))
+  if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
+    return imageUrl;
+  }
+  if (imageUrl.startsWith("/uploads")) {
     return `https://sandhya-furnishing-backend.onrender.com${imageUrl}`;
+  }
   return `https://sandhya-furnishing-backend.onrender.com/uploads/${imageUrl}`;
 };
 

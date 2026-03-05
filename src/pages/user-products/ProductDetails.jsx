@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api";
 import { addToCart } from "../../api/cartApi";
 import toast from "react-hot-toast";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const ProductDetails = () => {
   const { category } = useParams();
@@ -75,7 +76,7 @@ const ProductDetails = () => {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={`https://sandhya-furnishing-backend.onrender.com${product.images?.[0]}`}
+                src={getImageUrl(product.images?.[0])}
                 alt={product.name}
                 className="product-image"
               />

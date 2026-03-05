@@ -3,6 +3,7 @@ import api from "../../api";
 import AdminLayout from "./AdminLayout";
 import { useNavigate } from "react-router-dom";
 import { Plus, Edit2, Trash2, LayoutGrid } from "lucide-react";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const ManageCategories = () => {
   const navigate = useNavigate();
@@ -114,7 +115,7 @@ const ManageCategories = () => {
                 <div className="relative aspect-[4/3] bg-slate-50 border-b border-slate-100 overflow-hidden">
                   {cat.image_url ? (
                     <img
-                      src={`https://sandhya-furnishing-backend.onrender.com${cat.image_url}`}
+                      src={getImageUrl(cat.image_url)}
                       alt={cat.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     />
