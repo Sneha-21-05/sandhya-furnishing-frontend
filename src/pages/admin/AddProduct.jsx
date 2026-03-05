@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import AdminLayout from "./AdminLayout";
 import api from "../../api";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const AddProduct = () => {
   const { id } = useParams();

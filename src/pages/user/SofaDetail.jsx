@@ -61,9 +61,9 @@ const SofaDetail = () => {
         <img
           src={
             selectedColor?.images?.[0]
-              ? `http://localhost:5000/${selectedColor.images[0]}`
+              ? `https://sandhya-furnishing-backend.onrender.com/${selectedColor.images[0]}`
               : product.images?.[0]
-              ? `http://localhost:5000${product.images[0]}`
+              ? `https://sandhya-furnishing-backend.onrender.com${product.images[0]}`
               : ""
           }
           alt={product.name}
@@ -74,7 +74,7 @@ const SofaDetail = () => {
           {(selectedColor?.images || product.images || []).map((img, i) => (
             <img
               key={i}
-              src={`http://localhost:5000/${img}`}
+              src={`https://sandhya-furnishing-backend.onrender.com/${img}`}
               alt=""
               className="w-16 h-16 object-cover rounded border cursor-pointer"
               onClick={() =>

@@ -114,7 +114,7 @@ const ManageCategories = () => {
                 <div className="relative aspect-[4/3] bg-slate-50 border-b border-slate-100 overflow-hidden">
                   {cat.image_url ? (
                     <img
-                      src={`http://localhost:5000${cat.image_url}`}
+                      src={`https://sandhya-furnishing-backend.onrender.com${cat.image_url}`}
                       alt={cat.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     />

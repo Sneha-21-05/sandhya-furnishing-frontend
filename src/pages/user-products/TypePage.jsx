@@ -4,7 +4,7 @@ import api from "../../api";
 import UserLayout from "../../components/UserLayout";
 import { ArrowLeft, LayoutDashboard, Layers } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const TypePage = () => {
   const { categoryId } = useParams();

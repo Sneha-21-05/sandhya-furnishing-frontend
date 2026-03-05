@@ -4,7 +4,7 @@ import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { ShoppingCart, Trash2, Plus, Minus, ArrowRight, ShieldCheck, Tag, ChevronRight } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const Cart = () => {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/DashboardLayout";
 import { Camera, Eye, EyeOff, Save, CheckCircle2 } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();

@@ -6,7 +6,7 @@ import {
     MessageSquare, LogOut, User as UserIcon, LayoutDashboard, ChevronRight, Calendar
 } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const getProfileImageUrl = (img) => {
     if (!img) return "";

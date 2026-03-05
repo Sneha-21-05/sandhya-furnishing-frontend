@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductCard = ({ item }) => {
   const imageSrc = item?.image_url
-    ? `http://localhost:5000${item.image_url}`
+    ? `https://sandhya-furnishing-backend.onrender.com${item.image_url}`
     : "https://via.placeholder.com/300x200?text=No+Image";
 
   return (

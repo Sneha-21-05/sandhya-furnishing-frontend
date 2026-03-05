@@ -17,7 +17,7 @@ const Products = () => {
           <tr key={p._id}>
             <td>
               {p.images?.[0] && (
-                <img src={`http://localhost:5000${p.images[0]}`} width="60" />
+                <img src={`https://sandhya-furnishing-backend.onrender.com${p.images[0]}`} width="60" />
               )}
             </td>
             <td>{p.name}</td>

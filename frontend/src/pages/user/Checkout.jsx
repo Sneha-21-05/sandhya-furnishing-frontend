@@ -4,7 +4,7 @@ import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { MapPin, Receipt, CreditCard, CheckCircle2, ChevronRight, ArrowLeft, Package, Truck, Banknote, Building, Smartphone } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const Checkout = () => {
   const navigate = useNavigate();

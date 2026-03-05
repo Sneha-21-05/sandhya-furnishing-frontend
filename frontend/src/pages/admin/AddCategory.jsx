@@ -21,7 +21,7 @@ const AddCategory = () => {
         if (category) {
           setName(category.name);
           if (category.image_url) {
-            setPreview(`http://localhost:5000${category.image_url}`);
+            setPreview(`https://sandhya-furnishing-backend.onrender.com${category.image_url}`);
           }
         }
       });

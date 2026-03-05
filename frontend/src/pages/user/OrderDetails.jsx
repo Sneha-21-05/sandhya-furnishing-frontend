@@ -152,7 +152,7 @@ const OrderDetails = () => {
           </div>
 
           <a
-            href={`http://localhost:5000/api/orders/invoice/${order._id}`}
+            href={`https://sandhya-furnishing-backend.onrender.com/api/orders/invoice/${order._id}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#142C2C] border border-gray-200 px-6 py-2.5 rounded-xl font-semibold hover:border-[#9B804E] hover:text-[#9B804E] transition-colors shadow-sm whitespace-nowrap"
@@ -185,7 +185,7 @@ const OrderDetails = () => {
                   {order.items.map((item, idx) => {
                     const imageUrl = item.image?.startsWith("http")
                       ? item.image
-                      : `http://localhost:5000${item.image}`;
+                      : `https://sandhya-furnishing-backend.onrender.com${item.image}`;
 
                     return (
                       <div

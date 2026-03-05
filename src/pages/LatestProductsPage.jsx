@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { addToCart } from "../api/cartApi";
 import UserLayout from "../components/UserLayout";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const LatestProductsPage = () => {
   const navigate = useNavigate();

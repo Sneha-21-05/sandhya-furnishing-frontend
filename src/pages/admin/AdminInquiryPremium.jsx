@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Search, Send, Clock, CheckCircle, Mail, MessageSquare, Maximize, Phone, User, MoreVertical, Archive, ArrowLeft } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const AdminInquiryPremium = () => {
   const navigate = useNavigate();

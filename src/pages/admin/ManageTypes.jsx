@@ -163,7 +163,7 @@ const ManageTypes = () => {
                 <div className="relative aspect-[4/3] bg-slate-50 border-b border-slate-100 overflow-hidden">
                   {type.image_url ? (
                     <img
-                      src={`http://localhost:5000${type.image_url}`}
+                      src={`https://sandhya-furnishing-backend.onrender.com${type.image_url}`}
                       alt={type.type_name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     />

@@ -111,7 +111,7 @@ const AdminProducts = () => {
                         {p.image_url ? (
                           <div className="w-14 h-14 rounded-lg overflow-hidden border border-gray-200 bg-white">
                             <img
-                              src={`http://localhost:5000${p.image_url}`}
+                              src={`https://sandhya-furnishing-backend.onrender.com${p.image_url}`}
                               alt={p.name}
                               className="w-full h-full object-cover"
                             />

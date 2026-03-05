@@ -135,7 +135,7 @@ const Orders = () => {
                       {order.items.map((item, idx) => {
                         const imageUrl = item.image?.startsWith("http")
                           ? item.image
-                          : `http://localhost:5000${item.image}`;
+                          : `https://sandhya-furnishing-backend.onrender.com${item.image}`;
 
                         return (
                           <Link

@@ -11,8 +11,8 @@ const getImageUrl = (imageUrl) => {
   if (!imageUrl) return null;
   if (imageUrl.startsWith("http")) return imageUrl;
   if (imageUrl.startsWith("/uploads"))
-    return `http://localhost:5000${imageUrl}`;
-  return `http://localhost:5000/uploads/${imageUrl}`;
+    return `https://sandhya-furnishing-backend.onrender.com${imageUrl}`;
+  return `https://sandhya-furnishing-backend.onrender.com/uploads/${imageUrl}`;
 };
 
 /* ================= CATEGORY SLUG RESOLVER ================= */

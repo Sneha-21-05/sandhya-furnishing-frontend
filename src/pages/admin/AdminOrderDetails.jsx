@@ -247,7 +247,7 @@ const AdminOrderDetails = () => {
                   {order.items.map((item, idx) => {
                     const imgUrl = item.image?.startsWith("http")
                       ? item.image
-                      : `http://localhost:5000${item.image}`;
+                      : `https://sandhya-furnishing-backend.onrender.com${item.image}`;
 
                     return (
                       <div key={idx} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 py-5 border-b border-slate-100/80 last:border-0 first:pt-0 last:pb-0 group">

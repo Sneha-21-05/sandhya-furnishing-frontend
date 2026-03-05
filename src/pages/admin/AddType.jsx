@@ -26,7 +26,7 @@ const AddType = () => {
           setTypeName(type.type_name);
           setCategoryId(type.category_id);
           if (type.image_url) {
-            setPreview(`http://localhost:5000${type.image_url}`);
+            setPreview(`https://sandhya-furnishing-backend.onrender.com${type.image_url}`);
           }
         }
       });

@@ -4,7 +4,7 @@ import api from "../api";
 import { Search, ShoppingBag, ChevronRight } from "lucide-react";
 import UserLayout from "../components/UserLayout";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const UserDashboard = () => {
   const navigate = useNavigate();

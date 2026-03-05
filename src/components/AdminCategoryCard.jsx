@@ -4,7 +4,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 const AdminCategoryCard = ({ category, onEdit, onDelete }) => {
   const image =
     category.image_url
-      ? `http://localhost:5000${category.image_url}`
+      ? `https://sandhya-furnishing-backend.onrender.com${category.image_url}`
       : "https://via.placeholder.com/400x300";
 
   return (

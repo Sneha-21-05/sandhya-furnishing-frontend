@@ -20,9 +20,9 @@ const getImageUrl = (imageUrl) => {
 
   if (imageUrl.startsWith("http")) return imageUrl;
   if (imageUrl.startsWith("/uploads"))
-    return `http://localhost:5000${imageUrl}`;
+    return `https://sandhya-furnishing-backend.onrender.com${imageUrl}`;
 
-  return `http://localhost:5000/uploads/${imageUrl}`;
+  return `https://sandhya-furnishing-backend.onrender.com/uploads/${imageUrl}`;
 };
 
 const CottonGaddaDetails = () => {

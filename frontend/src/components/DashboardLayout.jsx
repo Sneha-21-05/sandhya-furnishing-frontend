@@ -11,7 +11,7 @@ import {
   Calendar
 } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const getProfileImageUrl = (img) => {
   if (!img) return "";
@@ -67,7 +67,7 @@ const DashboardLayout = ({ children }) => {
     const fetchUnread = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/inquiry/unread-count/${user.email}`
+          `https://sandhya-furnishing-backend.onrender.com/api/inquiry/unread-count/${user.email}`
         );
         const data = await res.json();
         if (data?.success) {

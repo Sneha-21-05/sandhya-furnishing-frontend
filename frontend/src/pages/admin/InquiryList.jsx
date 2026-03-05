@@ -86,7 +86,7 @@ const InquiryList = () => {
             {/* PRODUCT IMAGE */}
             <div className="relative group">
               <img
-                src={`http://localhost:5000${inq.product_id?.image_url}`}
+                src={`https://sandhya-furnishing-backend.onrender.com${inq.product_id?.image_url}`}
                 alt={inq.product_id?.product_name}
                 className="w-16 h-16 rounded-lg object-cover border
                   transition-transform duration-300 group-hover:scale-105"

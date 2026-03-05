@@ -50,7 +50,7 @@ const InquiryDetails = () => {
       {/* HEADER */}
       <div className="flex gap-4 border-b pb-4 mb-4">
         <img
-          src={`http://localhost:5000${inquiry.product_id?.image_url}`}
+          src={`https://sandhya-furnishing-backend.onrender.com${inquiry.product_id?.image_url}`}
           className="w-20 h-20 rounded object-cover"
         />
         <div>

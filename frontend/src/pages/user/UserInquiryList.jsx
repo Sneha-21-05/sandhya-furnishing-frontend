@@ -4,7 +4,7 @@ import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { Send, MessageSquare, Check, CheckCheck, CircleDashed, ArrowLeft, X } from "lucide-react";
 
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
 const UserInquiryList = () => {
   const [inquiries, setInquiries] = useState([]);

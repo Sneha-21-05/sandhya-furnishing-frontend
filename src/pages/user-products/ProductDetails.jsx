@@ -75,7 +75,7 @@ const ProductDetails = () => {
               style={{ cursor: "pointer" }}
             >
               <img
-                src={`http://localhost:5000${product.images?.[0]}`}
+                src={`https://sandhya-furnishing-backend.onrender.com${product.images?.[0]}`}
                 alt={product.name}
                 className="product-image"
               />
