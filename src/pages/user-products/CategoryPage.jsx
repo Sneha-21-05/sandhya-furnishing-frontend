@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import UserLayout from "../../components/UserLayout";
 import { ArrowLeft, LayoutDashboard, Grid } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const CategoryTypes = () => {
   const navigate = useNavigate();
@@ -91,7 +90,7 @@ const CategoryTypes = () => {
                 <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-white border border-gray-100 shadow-sm group-hover:shadow-xl group-hover:border-[#9B804E]/30 transition-all duration-500 transform group-hover:-translate-y-1">
                   {type.image_url ? (
                     <img
-                      src={`${BACKEND_URL}${type.image_url}`}
+                      src={getImageUrl(type.image_url)}
                       alt={type.type_name}
                       className="w-full h-full object-cover filter group-hover:scale-110 transition-transform duration-700 ease-out"
                     />

@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import UserLayout from "../../components/UserLayout";
 import { ArrowLeft, LayoutDashboard, Layers } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const TypePage = () => {
   const { categoryId } = useParams();
@@ -94,7 +93,7 @@ const TypePage = () => {
                 <div className="relative aspect-[4/3] w-full bg-[#FAFAFA] rounded-2xl overflow-hidden p-6 flex items-center justify-center mb-5 group-hover:bg-gray-50 transition-colors duration-500">
                   {type.image_url ? (
                     <img
-                      src={`${BACKEND_URL}${type.image_url}`}
+                      src={getImageUrl(type.image_url)}
                       alt={type.type_name}
                       className="w-full h-full object-contain filter group-hover:scale-105 transition-transform duration-700 ease-out mix-blend-multiply drop-shadow-sm"
                     />

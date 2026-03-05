@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import AdminLayout from "./AdminLayout";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const AddType = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const AddType = () => {
           setTypeName(type.type_name);
           setCategoryId(type.category_id);
           if (type.image_url) {
-            setPreview(`https://sandhya-furnishing-backend.onrender.com${type.image_url}`);
+            setPreview(getImageUrl(type.image_url));
           }
         }
       });
