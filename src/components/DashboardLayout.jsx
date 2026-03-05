@@ -12,8 +12,7 @@ import {
 } from "lucide-react";
 
 import { getImageUrl } from "../utils/imageUtils";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import api from "../api";
 
 const getProfileImageUrl = (img) => {
   if (!img) return "";
@@ -69,12 +68,9 @@ const DashboardLayout = ({ children }) => {
 
     const fetchUnread = async () => {
       try {
-        const res = await fetch(
-          `https://sandhya-furnishing-backend.onrender.com/api/inquiry/unread-count/${user.email}`
-        );
-        const data = await res.json();
-        if (data?.success) {
-          setUnreadCount(data.count);
+        const res = await api.get(`/inquiry/unread-count/${user.email}`);
+        if (res.data?.success) {
+          setUnreadCount(res.data.count);
         }
       } catch (err) {
         console.log("Unread fetch error:", err);

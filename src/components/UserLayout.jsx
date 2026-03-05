@@ -5,12 +5,11 @@ import {
     Menu, Search, ShoppingBag, ShoppingCart,
     MessageSquare, LogOut, User as UserIcon, LayoutDashboard, ChevronRight, Calendar
 } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../utils/imageUtils";
 
 const getProfileImageUrl = (img) => {
     if (!img) return "";
-    return `${BACKEND_URL}${img}?v=${Date.now()}`;
+    return `${getImageUrl(img)}?v=${Date.now()}`;
 };
 
 const UserLayout = ({ children }) => {

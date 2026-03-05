@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { Send, MessageSquare, Check, CheckCheck, CircleDashed, ArrowLeft, X } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const UserInquiryList = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -56,21 +55,12 @@ const UserInquiryList = () => {
   const getImage = (product) => {
     if (!product) return null;
 
-    if (product.image_url) return BACKEND_URL + product.image_url;
+    if (product.image_url) return getImageUrl(product.image_url);
 
     if (product.images?.length > 0)
-      return product.images[0].startsWith("http")
-        ? product.images[0]
-        : BACKEND_URL + product.images[0];
+      return getImageUrl(product.images[0]);
 
     return "/no-image.png";
-  };
-
-  const getImageUrl = (imageUrl) => {
-    if (!imageUrl) return null;
-    if (imageUrl.startsWith("http")) return imageUrl;
-    if (imageUrl.startsWith("/uploads")) return `${BACKEND_URL}${imageUrl}`;
-    return `${BACKEND_URL}/uploads/${imageUrl}`;
   };
 
   /* ================= PRODUCT DETAILS REDIRECT ================= */

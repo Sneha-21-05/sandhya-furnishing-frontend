@@ -4,8 +4,7 @@ import AdminLayout from "./AdminLayout";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Search, Send, Clock, CheckCircle, Mail, MessageSquare, Maximize, Phone, User, MoreVertical, Archive, ArrowLeft } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const AdminInquiryPremium = () => {
   const navigate = useNavigate();
@@ -19,13 +18,6 @@ const AdminInquiryPremium = () => {
   const [showMobileList, setShowMobileList] = useState(true);
 
   const chatRef = useRef(null);
-
-  const getImageUrl = (imageUrl) => {
-    if (!imageUrl) return null;
-    if (imageUrl.startsWith("http")) return imageUrl;
-    if (imageUrl.startsWith("/uploads")) return `${BACKEND_URL}${imageUrl}`;
-    return `${BACKEND_URL}/uploads/${imageUrl}`;
-  };
 
   const loadInquiries = async () => {
     try {

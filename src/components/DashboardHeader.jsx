@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../utils/imageUtils";
 
 const DashboardHeader = ({
   userName,
@@ -14,11 +13,7 @@ const DashboardHeader = ({
   // ✅ Automatically fix backend image path
   const getProfileImageUrl = () => {
     if (!profileImage) return null;
-
-    // If already full URL, return directly
-    if (profileImage.startsWith("http")) return profileImage;
-
-    return `${BACKEND_URL}${profileImage}`;
+    return getImageUrl(profileImage);
   };
 
   return (

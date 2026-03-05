@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { Search, ShoppingBag, ChevronRight } from "lucide-react";
 import UserLayout from "../components/UserLayout";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../utils/imageUtils";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
@@ -219,7 +218,7 @@ const UserDashboard = () => {
                     <div className="absolute inset-0 bg-[#9B804E]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     {cat.image_url ? (
                       <img
-                        src={`${BACKEND_URL}${cat.image_url}`}
+                        src={getImageUrl(cat.image_url)}
                         alt={cat.name}
                         className="w-full h-full object-contain filter group-hover:scale-110 transition-transform duration-500 ease-out"
                       />
@@ -295,7 +294,7 @@ const ProductCard = ({ product: p, navigate }) => {
         <img
           src={
             p.images?.[0]
-              ? `${BACKEND_URL}${p.images[0]}`
+              ? getImageUrl(p.images[0])
               : "/no-image.png"
           }
           alt={p.name}

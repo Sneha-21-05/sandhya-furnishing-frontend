@@ -3,8 +3,7 @@ import api from "../api";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/DashboardLayout";
 import { Camera, Eye, EyeOff, Save, CheckCircle2 } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../utils/imageUtils";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -170,7 +169,7 @@ const UpdateProfile = () => {
                   />
                 ) : existingImage ? (
                   <img
-                    src={`${BACKEND_URL}${existingImage}`}
+                    src={getImageUrl(existingImage)}
                     alt="Profile"
                     className="w-full h-full object-cover"
                   />

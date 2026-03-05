@@ -3,8 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { MapPin, Receipt, CreditCard, CheckCircle2, ChevronRight, ArrowLeft, Package, Truck, Banknote, Building, Smartphone } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -266,49 +265,49 @@ const Checkout = () => {
 
   /* ================= RAZORPAY ONLINE PAYMENT ================= */
   const handleOnlinePayment = async () => {
-  try {
-    // 1️⃣ Create Razorpay order
-    const res = await api.post("/payment/create-order", {
-      amount: parseFloat(total),
-    });
+    try {
+      // 1️⃣ Create Razorpay order
+      const res = await api.post("/payment/create-order", {
+        amount: parseFloat(total),
+      });
 
-    // FIXED 🔥
-    const { id, amount } = res.data.order;
+      // FIXED 🔥
+      const { id, amount } = res.data.order;
 
-    const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID,  
-      amount,
-      currency: "INR",
-      order_id: id,
-      name: "Sandhya Furnishing",
-      handler: async (response) => {
-        const verifyRes = await api.post("/payment/verify-payment", {
-          razorpay_payment_id: response.razorpay_payment_id,
-          razorpay_order_id: response.razorpay_order_id,
-          razorpay_signature: response.razorpay_signature,
-          orderData: {
-            userId: user._id,
-            items,
-            fullName: `${shipping.firstName} ${shipping.lastName}`,
-            phone: shipping.phone,
-            address: `${shipping.address1}, ${shipping.city}, ${shipping.state} - ${shipping.zip}`,
-            paymentMethod: "online",
-            subtotal: parseFloat(subtotal),
-            platformFee,
-            grandTotal: parseFloat(total),
-          },
-        });
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount,
+        currency: "INR",
+        order_id: id,
+        name: "Sandhya Furnishing",
+        handler: async (response) => {
+          const verifyRes = await api.post("/payment/verify-payment", {
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+            orderData: {
+              userId: user._id,
+              items,
+              fullName: `${shipping.firstName} ${shipping.lastName}`,
+              phone: shipping.phone,
+              address: `${shipping.address1}, ${shipping.city}, ${shipping.state} - ${shipping.zip}`,
+              paymentMethod: "online",
+              subtotal: parseFloat(subtotal),
+              platformFee,
+              grandTotal: parseFloat(total),
+            },
+          });
 
-        if (verifyRes.data.success) navigate("/user/order-success");
-      },
-    };
-    const rz = new window.Razorpay(options);
-    rz.open();
-  } catch (err) {
-    console.error(err);
-    setPopup({ show: true, message: "Payment Failed" });
-  }
-};
+          if (verifyRes.data.success) navigate("/user/order-success");
+        },
+      };
+      const rz = new window.Razorpay(options);
+      rz.open();
+    } catch (err) {
+      console.error(err);
+      setPopup({ show: true, message: "Payment Failed" });
+    }
+  };
 
 
   const steps = [
@@ -496,9 +495,7 @@ const Checkout = () => {
                   <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest pl-1">Items ({items.length})</h3>
                   <div className="space-y-4">
                     {items.map((item, idx) => {
-                      const imageUrl = item.image?.startsWith("http")
-                        ? item.image
-                        : `${BACKEND_URL}${item.image}`;
+                      const imageUrl = getImageUrl(item.image);
 
                       return (
                         <div key={idx} className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl border border-gray-100 hover:border-gray-200 transition-colors bg-gray-50/50">
@@ -653,14 +650,14 @@ const Checkout = () => {
                         }`}
                     >
                       <div className="mt-1 relative flex items-center justify-center">
-                       <input
-                        type="radio"
-                        name="payment"
-                        value="quote_request"
-                        checked={paymentMethod === "quote_request"}
-                        onChange={() => setPaymentMethod("quote_request")}
-                        className="peer sr-only"
-                      />
+                        <input
+                          type="radio"
+                          name="payment"
+                          value="quote_request"
+                          checked={paymentMethod === "quote_request"}
+                          onChange={() => setPaymentMethod("quote_request")}
+                          className="peer sr-only"
+                        />
                         <div className={`w-5 h-5 rounded-full border-2 transition-all ${paymentMethod === 'quote_request' ? 'border-[#9B804E] border-4' : 'border-gray-300'
                           }`}></div>
                       </div>
@@ -696,14 +693,14 @@ const Checkout = () => {
                       >
                         <div className="mt-1 relative flex items-center justify-center">
                           <input
-                          type="radio"
-                          name="payment"
-                          value={opt.id}
-                          disabled={opt.id !== "cod" && !isEmailVerified}
-                          checked={paymentMethod === opt.id}
-                          onChange={() => setPaymentMethod(opt.id)}
-                          className="peer sr-only"
-                        />
+                            type="radio"
+                            name="payment"
+                            value={opt.id}
+                            disabled={opt.id !== "cod" && !isEmailVerified}
+                            checked={paymentMethod === opt.id}
+                            onChange={() => setPaymentMethod(opt.id)}
+                            className="peer sr-only"
+                          />
                           <div className={`w-5 h-5 rounded-full border-2 transition-all ${paymentMethod === opt.id ? 'border-[#9B804E] border-4' : 'border-gray-300'
                             }`}></div>
                         </div>

@@ -3,8 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { ShoppingCart, Trash2, Plus, Minus, ArrowRight, ShieldCheck, Tag, ChevronRight } from "lucide-react";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -159,9 +158,7 @@ const Cart = () => {
             <div className="bg-white rounded-[1.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-gray-100 overflow-hidden">
               <div className="p-6 sm:p-8 divide-y divide-gray-100">
                 {items.map((item, idx) => {
-                  const imageUrl = item.image?.startsWith("http")
-                    ? item.image
-                    : `${BACKEND_URL}${item.image}`;
+                  const imageUrl = getImageUrl(item.image);
 
                   return (
                     <div
