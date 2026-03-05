@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import api from "../../api";
 import { Link } from "react-router-dom";
 import DashboardLayout from "../../components/DashboardLayout";
-import { Package, Clock, CheckCircle, ExternalLink, ChevronRight, X } from "lucide-react";
+import { Package, Clock, CheckCircle, ExternalLink, ChevronRight, X, CreditCard } from "lucide-react";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -133,9 +134,7 @@ const Orders = () => {
                   <div className="p-6 sm:p-8">
                     <div className="divide-y divide-gray-100">
                       {order.items.map((item, idx) => {
-                        const imageUrl = item.image?.startsWith("http")
-                          ? item.image
-                          : `https://sandhya-furnishing-backend.onrender.com${item.image}`;
+                        const imageUrl = getImageUrl(item.image);
 
                         return (
                           <Link

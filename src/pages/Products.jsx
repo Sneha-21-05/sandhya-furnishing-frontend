@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
+import { getImageUrl } from "../utils/imageUtils";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +18,7 @@ const Products = () => {
           <tr key={p._id}>
             <td>
               {p.images?.[0] && (
-                <img src={`https://sandhya-furnishing-backend.onrender.com${p.images[0]}`} width="60" />
+                <img src={getImageUrl(p.images[0])} width="60" />
               )}
             </td>
             <td>{p.name}</td>

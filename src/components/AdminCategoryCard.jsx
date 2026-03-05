@@ -1,11 +1,9 @@
 import React from "react";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { getImageUrl } from "../utils/imageUtils";
 
 const AdminCategoryCard = ({ category, onEdit, onDelete }) => {
-  const image =
-    category.image_url
-      ? `https://sandhya-furnishing-backend.onrender.com${category.image_url}`
-      : "https://via.placeholder.com/400x300";
+  const image = getImageUrl(category.image_url);
 
   return (
     <div className="bg-white rounded-xl shadow p-4 relative">

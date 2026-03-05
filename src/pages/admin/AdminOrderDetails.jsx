@@ -4,6 +4,7 @@ import api from "../../api";
 import AdminLayout from "./AdminLayout";
 import toast from "react-hot-toast";
 import { ArrowLeft, Package, User, MapPin, Phone, Mail, CreditCard, Calendar, CheckCircle, Truck, Clock, XCircle, Info, ChevronRight, ShieldAlert } from "lucide-react";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const AdminOrderDetails = () => {
   const { orderId } = useParams();
@@ -245,9 +246,7 @@ const AdminOrderDetails = () => {
               <div className="p-6">
                 <div className="divide-y divide-slate-100/80">
                   {order.items.map((item, idx) => {
-                    const imgUrl = item.image?.startsWith("http")
-                      ? item.image
-                      : `https://sandhya-furnishing-backend.onrender.com${item.image}`;
+                    const imgUrl = getImageUrl(item.image);
 
                     return (
                       <div key={idx} className="flex flex-col sm:flex-row items-start sm:items-center gap-5 py-5 border-b border-slate-100/80 last:border-0 first:pt-0 last:pb-0 group">

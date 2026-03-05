@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api";
 import { Link } from "react-router-dom";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const InquiryList = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -86,7 +87,7 @@ const InquiryList = () => {
             {/* PRODUCT IMAGE */}
             <div className="relative group">
               <img
-                src={`https://sandhya-furnishing-backend.onrender.com${inq.product_id?.image_url}`}
+                src={getImageUrl(inq.product_id?.image_url)}
                 alt={inq.product_id?.product_name}
                 className="w-16 h-16 rounded-lg object-cover border
                   transition-transform duration-300 group-hover:scale-105"
@@ -108,10 +109,9 @@ const InquiryList = () => {
 
               <span
                 className={`inline-block mt-2 text-xs px-3 py-1 rounded-full
-                  ${
-                    inq.status === "pending"
-                      ? "bg-amber-100 text-amber-700"
-                      : "bg-green-100 text-green-700"
+                  ${inq.status === "pending"
+                    ? "bg-amber-100 text-amber-700"
+                    : "bg-green-100 text-green-700"
                   }`}
               >
                 {inq.status}

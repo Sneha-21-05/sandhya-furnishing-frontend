@@ -6,8 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../utils/imageUtils";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -197,7 +196,7 @@ const Home = () => {
                 >
                   <div className="overflow-hidden rounded-xl mb-4 h-64 bg-gray-50 border border-gray-100 relative">
                     <img
-                      src={`${BACKEND_URL}${item.images?.[0]}`}
+                      src={getImageUrl(item.images?.[0])}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />

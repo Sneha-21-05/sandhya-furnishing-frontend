@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const InquiryDetails = () => {
   const { id } = useParams();
@@ -50,7 +51,7 @@ const InquiryDetails = () => {
       {/* HEADER */}
       <div className="flex gap-4 border-b pb-4 mb-4">
         <img
-          src={`https://sandhya-furnishing-backend.onrender.com${inquiry.product_id?.image_url}`}
+          src={getImageUrl(inquiry.product_id?.image_url)}
           className="w-20 h-20 rounded object-cover"
         />
         <div>
@@ -70,10 +71,9 @@ const InquiryDetails = () => {
           <div
             key={i}
             className={`max-w-[70%] px-4 py-2 rounded-xl text-sm
-              ${
-                m.sender === "admin"
-                  ? "ml-auto bg-[#d4f3dc]"
-                  : "mr-auto bg-[#e6d3b1]"
+              ${m.sender === "admin"
+                ? "ml-auto bg-[#d4f3dc]"
+                : "mr-auto bg-[#e6d3b1]"
               }`}
           >
             {m.text}

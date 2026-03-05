@@ -108,6 +108,7 @@ const AddProduct = () => {
     const loadProduct = async () => {
       const res = await api.get(`/products/${id}`);
       const p = res.data.product;
+      const extra = p.extraFields || {};
 
       // SET BASIC INFO
       setProductData({
@@ -163,15 +164,16 @@ const AddProduct = () => {
       setPillowDimensions(p.extraFields?.dimensions || "");
 
       // ========== CARPET FIELDS ==========
-      setCarpetType(p.extraFields?.carpetType || "");
-      setCarpetSize(p.extraFields?.size || "");
-      setCarpetWeight(p.extraFields?.weight || "");
-      setCarpetMaterial(p.extraFields?.material || "");
-      setCarpetWashType(p.extraFields?.washType || "");
-      setCarpetColorOptions(p.extraFields?.colorOptions || "");
-      setCarpetShape(p.extraFields?.shape || "");
-      setCarpetAdditionalNote(p.extraFields?.additionalNote || "");
-      
+      // ========== CARPET FIELDS ==========
+      setCarpetType(extra.carpetType || "");
+      setCarpetSize(extra.size || "");
+      setCarpetWeight(extra.weight || "");
+      setCarpetMaterial(extra.material || "");
+      setCarpetWashType(extra.washType || "");
+      setCarpetColorOptions(extra.colorOptions || "");
+      setCarpetShape(extra.shape || "");
+      setCarpetAdditionalNote(extra.additionalNote || "");
+
       // NOTE: curtain extra note uses a separate field in state,
       // but DB uses same key "extraNote"
       setCurtainExtraNote(p.extraFields?.extraNote || "");
@@ -255,8 +257,10 @@ const AddProduct = () => {
     formData.append("type_id", selectedType);
     formData.append("isLatest", productData.isLatest);
 
+    const catLower = selectedCategory?.toLowerCase()?.trim() || "";
+
     // SOFA
-    if (selectedCategory?.toLowerCase() === "sofa") {
+    if (catLower.includes("sofa")) {
       formData.append(
         "extraFields",
         JSON.stringify({
@@ -270,7 +274,7 @@ const AddProduct = () => {
     }
 
     // CURTAINS
-    if (selectedCategory?.toLowerCase() === "curtains") {
+    if (catLower.includes("curtain")) {
       formData.append(
         "extraFields",
         JSON.stringify({
@@ -290,7 +294,7 @@ const AddProduct = () => {
       );
     }
 
-    if (selectedCategory?.toLowerCase() === "carpet") {
+    if (catLower.includes("carpet")) {
       formData.append(
         "extraFields",
         JSON.stringify({
@@ -307,7 +311,7 @@ const AddProduct = () => {
     }
 
     // PILLOWS
-    if (selectedCategory?.toLowerCase() === "pillows") {
+    if (catLower.includes("pillow")) {
       formData.append(
         "extraFields",
         JSON.stringify({
@@ -322,7 +326,7 @@ const AddProduct = () => {
     }
 
     // COTTON GADDA
-    if (selectedCategory?.toLowerCase() === "cotton gadda") {
+    if (catLower.includes("cotton") || catLower.includes("gadda") || catLower.includes("bedding")) {
       formData.append(
         "extraFields",
         JSON.stringify({
@@ -531,7 +535,7 @@ const AddProduct = () => {
           </div>
 
           {/* ================= CURTAIN FIELDS ================= */}
-          {selectedCategory?.toLowerCase() === "curtains" && (
+          {(selectedCategory?.toLowerCase()?.trim() || "").includes("curtain") && (
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <h2 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
@@ -605,7 +609,7 @@ const AddProduct = () => {
           )}
 
           {/* ================= SOFA FIELDS ================= */}
-          {selectedCategory?.toLowerCase() === "sofa" && (
+          {(selectedCategory?.toLowerCase()?.trim() || "").includes("sofa") && (
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <h2 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
@@ -641,7 +645,7 @@ const AddProduct = () => {
             </div>
           )}
 
-          {selectedCategory?.toLowerCase() === "cotton gadda" && (
+          {((selectedCategory?.toLowerCase()?.trim() || "").includes("cotton") || (selectedCategory?.toLowerCase()?.trim() || "").includes("gadda") || (selectedCategory?.toLowerCase()?.trim() || "").includes("bedding")) && (
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <h2 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-green-50 text-green-600 flex items-center justify-center shrink-0">
@@ -718,7 +722,7 @@ const AddProduct = () => {
           )}
 
           {/* ================= CARPET FIELDS ================= */}
-          {selectedCategory?.toLowerCase() === "carpet" && (
+          {(selectedCategory?.toLowerCase()?.trim() || "").includes("carpet") && (
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <h2 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
@@ -824,7 +828,7 @@ const AddProduct = () => {
           )}
 
           {/* ================= PILLOW FIELDS ================= */}
-          {selectedCategory?.toLowerCase() === "pillows" && (
+          {(selectedCategory?.toLowerCase()?.trim() || "").includes("pillow") && (
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <h2 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">

@@ -4,6 +4,7 @@ import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { ArrowLeft, MapPin, Phone, CreditCard, Clock, Package, CheckCircle, Truck, FileText } from "lucide-react";
 import toast from "react-hot-toast";
+import { getImageUrl } from "../../utils/imageUtils";
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -183,9 +184,7 @@ const OrderDetails = () => {
               <div className="p-6 sm:p-8">
                 <div className="divide-y divide-gray-100">
                   {order.items.map((item, idx) => {
-                    const imageUrl = item.image?.startsWith("http")
-                      ? item.image
-                      : `https://sandhya-furnishing-backend.onrender.com${item.image}`;
+                    const imageUrl = getImageUrl(item.image);
 
                     return (
                       <div

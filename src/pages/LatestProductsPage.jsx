@@ -5,8 +5,7 @@ import { ShoppingBag, ArrowRight, ShoppingCart } from "lucide-react";
 import toast from "react-hot-toast";
 import { addToCart } from "../api/cartApi";
 import UserLayout from "../components/UserLayout";
-
-const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
+import { getImageUrl } from "../utils/imageUtils";
 
 const LatestProductsPage = () => {
   const navigate = useNavigate();
@@ -138,7 +137,7 @@ const LatestProductsPage = () => {
                   {/* Premium Image Container */}
                   <div className="relative aspect-[4/5] w-full bg-[#FAFAFA] flex items-center justify-center p-4">
                     <img
-                      src={`${BACKEND_URL}${p.images?.[0]}`}
+                      src={getImageUrl(p.images?.[0])}
                       alt={p.name}
                       className="w-full h-full object-contain filter group-hover:scale-105 transition-transform duration-700 ease-out mix-blend-multiply drop-shadow-sm"
                     />
