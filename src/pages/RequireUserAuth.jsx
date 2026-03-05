@@ -5,7 +5,7 @@ const RequireUserAuth = ({ children }) => {
   const location = useLocation();
 
   if (!token) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    if (!token) return <Navigate to="/login" replace />;
   }
 
   return children;
