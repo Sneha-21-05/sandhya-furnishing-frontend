@@ -66,7 +66,7 @@ const Checkout = () => {
 
   /* ================= FETCH EMAIL VERIFIED STATUS ================= */
   useEffect(() => {
-    api.get("/user/me").then((res) => {
+    api.get("/users/me").then((res) => {
       if (res.data.success) {
         setIsEmailVerified(res.data.user.isEmailVerified);
       }
