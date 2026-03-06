@@ -39,7 +39,7 @@ const PillowsDetails = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const displayName =
-    user?.fullName ||
+    user?.fullname || user?.fullName ||
     (user?.firstName && user?.lastName
       ? user.firstName + " " + user.lastName
       : "");
@@ -174,8 +174,8 @@ const PillowsDetails = () => {
 
   const dimensionImage =
     product.dimensionImages?.length
-        ? getImageUrl(product.dimensionImages[0])
-        : null;
+      ? getImageUrl(product.dimensionImages[0])
+      : null;
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans text-gray-800 flex flex-col pt-8">
@@ -201,29 +201,28 @@ const PillowsDetails = () => {
 
                   <span className="bg-white border border-gray-100 px-3 py-1.5 rounded-full text-[11px] text-gray-600 font-bold shadow-sm flex items-center gap-2">
                     <span
-                      className={`w-1.5 h-1.5 rounded-full ${
-                        product.inStock ? "bg-emerald-500" : "bg-amber-500"
-                      }`}
+                      className={`w-1.5 h-1.5 rounded-full ${product.inStock ? "bg-emerald-500" : "bg-amber-500"
+                        }`}
                     ></span>
                     {product.inStock ? "In Stock" : "Made to Order"}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-4">
-                <span
+                  <span
                     onClick={() => navigate("/user/dashboard")}
                     className="text-[11px] font-bold text-gray-400 hover:text-[#0a2328] uppercase tracking-wider cursor-pointer"
-                >
+                  >
                     Home
-                </span>
+                  </span>
 
-                <span
+                  <span
                     onClick={() => navigate(-1)}
                     className="text-[11px] font-bold text-gray-400 hover:text-[#0a2328] uppercase tracking-wider cursor-pointer"
-                >
+                  >
                     Back
-                </span>
-            </div>
+                  </span>
+                </div>
               </div>
 
               <h1 className="text-4xl font-black text-gray-900 mb-5 tracking-tight">
@@ -276,27 +275,27 @@ const PillowsDetails = () => {
 
             {/* BUTTONS */}
             <div className="space-y-3 pt-2">
-            <button
+              <button
                 onClick={handleOrderNow}
                 className="w-full py-4 bg-[#0a2328] text-white rounded-xl font-bold text-[15px] hover:bg-[#133036] transition"
-            >
+              >
                 Buy Now
-            </button>
+              </button>
 
-            <button
+              <button
                 onClick={handleAddToCart}
                 className="w-full py-4 bg-white text-[#0a2328] border-2 border-[#0a2328] rounded-xl font-bold text-[15px] hover:bg-gray-50 transition flex items-center justify-center gap-2"
-            >
+              >
                 <ShoppingBag size={18} className="stroke-[2.5]" />
                 Add to Cart
-            </button>
+              </button>
 
-            <button
+              <button
                 onClick={() => setShowInquiryModal(true)}
                 className="w-full py-4 bg-indigo-50 text-indigo-900 border border-indigo-200 rounded-xl font-bold text-[13px] hover:bg-indigo-100 transition"
-            >
+              >
                 Send Inquiry
-            </button>
+              </button>
             </div>
 
             {/* TRUST ICONS */}
@@ -475,47 +474,47 @@ const PillowsDetails = () => {
             <div className="bg-white w-full max-w-md rounded-2xl p-8 shadow-xl space-y-5">
               <h3 className="text-2xl font-bold text-[#142C2C]">General Inquiry</h3>
 
-                <div className="space-y-4">
-                    <div>
-                        <label className="text-sm font-semibold text-gray-500 mb-1 block">Name</label>
-                        <input
-                        value={displayName}
-                        disabled
-                        className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50"
-                        />
-                    </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-semibold text-gray-500 mb-1 block">Name</label>
+                  <input
+                    value={displayName}
+                    disabled
+                    className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50"
+                  />
+                </div>
 
-                    <div>
-                        <label className="text-sm font-semibold text-gray-500 mb-1 block">Email</label>
-                        <input
-                        value={user?.email || ""}
-                        disabled
-                        className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50"
-                        />
-                    </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-500 mb-1 block">Email</label>
+                  <input
+                    value={user?.email || ""}
+                    disabled
+                    className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50"
+                  />
+                </div>
 
-                    <div>
-                        <label className="text-sm font-semibold text-gray-500 mb-1 block">Phone</label>
-                        <input
-                        value={user?.phone || ""}
-                        disabled
-                        className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50"
-                        />
-                    </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-500 mb-1 block">Phone</label>
+                  <input
+                    value={user?.phone || ""}
+                    disabled
+                    className="w-full border border-gray-200 p-3 rounded-xl bg-gray-50"
+                  />
+                </div>
 
-                    <div>
-                        <label className="text-sm font-semibold text-[#142C2C] mb-1 block">
-                        Message <span className="text-red-500">*</span>
-                        </label>
-                        <textarea
-                        value={generalMessage}
-                        onChange={(e) => setGeneralMessage(e.target.value)}
-                        placeholder="Write your message..."
-                        required
-                        className="w-full border border-gray-300 p-3 rounded-xl min-h-[120px] resize-none"
-                        />
-                    </div>
-                    </div>
+                <div>
+                  <label className="text-sm font-semibold text-[#142C2C] mb-1 block">
+                    Message <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    value={generalMessage}
+                    onChange={(e) => setGeneralMessage(e.target.value)}
+                    placeholder="Write your message..."
+                    required
+                    className="w-full border border-gray-300 p-3 rounded-xl min-h-[120px] resize-none"
+                  />
+                </div>
+              </div>
 
               <div className="flex justify-end gap-3 pt-4">
                 <button

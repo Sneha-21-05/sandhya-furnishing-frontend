@@ -36,7 +36,7 @@ const CarpetDetails = () => {
   /* USER */
   const user = JSON.parse(localStorage.getItem("user"));
   const displayName =
-    user?.fullName ||
+    user?.fullname || user?.fullName ||
     (user?.firstName && user?.lastName
       ? user.firstName + " " + user.lastName
       : "");

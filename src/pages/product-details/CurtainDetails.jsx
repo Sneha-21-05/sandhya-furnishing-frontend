@@ -49,7 +49,7 @@ const CurtainsDetails = () => {
 
 
   const displayName =
-    user?.fullName ||
+    user?.fullname || user?.fullName ||
     (user?.firstName && user?.lastName
       ? `${user.firstName} ${user.lastName}`
       : "");

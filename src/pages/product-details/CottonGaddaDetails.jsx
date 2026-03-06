@@ -47,7 +47,7 @@ const CottonGaddaDetails = () => {
   /* USER DATA */
   const user = JSON.parse(localStorage.getItem("user"));
   const displayName =
-    user?.fullName ||
+    user?.fullname || user?.fullName ||
     (user?.firstName && user?.lastName
       ? user.firstName + " " + user.lastName
       : "");
@@ -272,54 +272,54 @@ const CottonGaddaDetails = () => {
             {/* ===== ACTION BUTTONS (SOFA STYLE) ===== */}
             <div className="space-y-3 pt-2">
 
-            {/* BUY NOW */}
-            <button
+              {/* BUY NOW */}
+              <button
                 onClick={handleOrderNow}
                 className="w-full py-4 bg-[#0a2328] text-white rounded-xl font-bold text-[15px]
                         hover:bg-[#133036] transition-all duration-300 shadow-md"
-            >
+              >
                 Buy Now
-            </button>
+              </button>
 
-            {/* ADD TO CART */}
-            <button
+              {/* ADD TO CART */}
+              <button
                 onClick={handleAddToCart}
                 className="w-full py-3.5 bg-white text-[#0a2328] border-2 border-[#0a2328]
                         rounded-xl font-bold text-[15px] hover:bg-gray-50 transition-all
                         duration-300 flex items-center justify-center gap-2"
-            >
+              >
                 <ShoppingBag size={18} className="stroke-[2.5]" />
                 Add to Cart
-            </button>
+              </button>
 
-            {/* 2-BUTTON ROW (CUSTOM SIZE + INQUIRY) */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
+              {/* 2-BUTTON ROW (CUSTOM SIZE + INQUIRY) */}
+              <div className="grid grid-cols-2 gap-3 pt-2">
                 <button
-                onClick={() => setShowCustomSizeModal(true)}
-                className="py-3.5 bg-white text-[#0a2328] rounded-xl font-bold text-[13px]
+                  onClick={() => setShowCustomSizeModal(true)}
+                  className="py-3.5 bg-white text-[#0a2328] rounded-xl font-bold text-[13px]
                             hover:bg-gray-50 transition-colors border border-gray-200"
                 >
-                Request Custom Size
+                  Request Custom Size
                 </button>
 
                 <button
-                onClick={() => setShowInquiryModal(true)}
-                className="py-3.5 bg-white text-indigo-900 rounded-xl font-bold text-[13px]
+                  onClick={() => setShowInquiryModal(true)}
+                  className="py-3.5 bg-white text-indigo-900 rounded-xl font-bold text-[13px]
                             hover:bg-indigo-50 transition-colors border border-indigo-200"
                 >
-                Send Inquiry
+                  Send Inquiry
                 </button>
-            </div>
+              </div>
 
-            {/* REFURBISH BANNER */}
-            <button
+              {/* REFURBISH BANNER */}
+              <button
                 onClick={() => setShowRefurbishModal(true)}
                 className="w-full mt-2 py-3.5 bg-amber-50 text-amber-900 rounded-xl font-bold text-[13px]
                         hover:bg-amber-100 transition-colors border border-amber-200/60 
                         shadow-sm flex items-center justify-center gap-2"
-            >
+              >
                 🛠️ Have an existing gadda? Get it Refurbished
-            </button>
+              </button>
             </div>
 
             {/* TRUST BADGES */}
@@ -477,87 +477,87 @@ const CottonGaddaDetails = () => {
 
         {/* REFURBISH MODAL - SAME AS SOFA STYLE */}
         {showRefurbishModal && (
-        <ModalWrapper onClose={() => setShowRefurbishModal(false)}>
+          <ModalWrapper onClose={() => setShowRefurbishModal(false)}>
             <h3 className="text-2xl font-bold mb-1">Refurbish / Repair</h3>
             <p className="text-gray-500 mb-6 text-sm">
-            Upload your existing Cotton Gadda and tell us what changes you need.
+              Upload your existing Cotton Gadda and tell us what changes you need.
             </p>
 
             <div className="space-y-6">
 
-            {/* UPLOAD IMAGES */}
-            <div>
+              {/* UPLOAD IMAGES */}
+              <div>
                 <label className="block font-semibold text-sm mb-1">
-                Upload Images (max 3)
+                  Upload Images (max 3)
                 </label>
 
                 <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleRefurbishImage}
-                className="mt-2"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleRefurbishImage}
+                  className="mt-2"
                 />
 
                 {refurbishPreview.length > 0 && (
-                <div className="grid grid-cols-3 gap-3 mt-3">
+                  <div className="grid grid-cols-3 gap-3 mt-3">
                     {refurbishPreview.map((img, idx) => (
-                    <img
+                      <img
                         key={idx}
                         src={img}
                         className="w-full h-24 object-cover rounded-xl border"
-                    />
+                      />
                     ))}
-                </div>
+                  </div>
                 )}
-            </div>
+              </div>
 
-            {/* NEW FABRIC MATERIAL */}
-            <div>
+              {/* NEW FABRIC MATERIAL */}
+              <div>
                 <label className="font-semibold text-sm mb-1">New Fabric Material</label>
                 <input
-                value={refurbishFabric}
-                onChange={(e) => setRefurbishFabric(e.target.value)}
-                placeholder="e.g., Cotton / Soft Cotton / Mix"
-                className="w-full border p-3 rounded-xl"
+                  value={refurbishFabric}
+                  onChange={(e) => setRefurbishFabric(e.target.value)}
+                  placeholder="e.g., Cotton / Soft Cotton / Mix"
+                  className="w-full border p-3 rounded-xl"
                 />
-            </div>
+              </div>
 
-            {/* NEW FILLING TYPE */}
-            <div>
+              {/* NEW FILLING TYPE */}
+              <div>
                 <label className="font-semibold text-sm mb-1">New Filling Type</label>
                 <input
-                value={refurbishFilling}
-                onChange={(e) => setRefurbishFilling(e.target.value)}
-                placeholder="e.g., Soft Cotton / Recycled Cotton"
-                className="w-full border p-3 rounded-xl"
+                  value={refurbishFilling}
+                  onChange={(e) => setRefurbishFilling(e.target.value)}
+                  placeholder="e.g., Soft Cotton / Recycled Cotton"
+                  className="w-full border p-3 rounded-xl"
                 />
-            </div>
+              </div>
 
-            {/* ADDITIONAL NOTE */}
-            <div>
+              {/* ADDITIONAL NOTE */}
+              <div>
                 <label className="font-semibold text-sm mb-1">
-                Additional Note <span className="text-red-500">*</span>
+                  Additional Note <span className="text-red-500">*</span>
                 </label>
                 <textarea
-                value={refurbishNote}
-                onChange={(e) => setRefurbishNote(e.target.value)}
-                placeholder="Describe repair or changes needed…"
-                className="w-full border p-3 rounded-xl min-h-[120px]"
+                  value={refurbishNote}
+                  onChange={(e) => setRefurbishNote(e.target.value)}
+                  placeholder="Describe repair or changes needed…"
+                  className="w-full border p-3 rounded-xl min-h-[120px]"
                 />
-            </div>
+              </div>
             </div>
 
             {/* BUTTONS */}
             <div className="flex justify-end gap-3 mt-8">
-            <ButtonLight onClick={() => setShowRefurbishModal(false)}>
+              <ButtonLight onClick={() => setShowRefurbishModal(false)}>
                 Cancel
-            </ButtonLight>
-            <ButtonDark onClick={submitRefurbish}>
+              </ButtonLight>
+              <ButtonDark onClick={submitRefurbish}>
                 Submit Request
-            </ButtonDark>
+              </ButtonDark>
             </div>
-        </ModalWrapper>
+          </ModalWrapper>
         )}
 
         {/* INQUIRY MODAL */}
