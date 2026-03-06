@@ -685,10 +685,13 @@ const Checkout = () => {
                     ].map((opt) => (
                       <label
                         key={opt.id}
-                        className={`flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${paymentMethod === opt.id
+                        className={`flex items-start gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${!isEmailVerified ? 'opacity-50 cursor-not-allowed bg-gray-50' : paymentMethod === opt.id
                           ? 'border-[#9B804E] bg-[#9B804E]/5 shadow-sm'
                           : 'border-gray-100 hover:border-gray-200 bg-white'
                           }`}
+                        onClick={(e) => {
+                          if (!isEmailVerified) e.preventDefault();
+                        }}
                       >
                         <div className="mt-1 relative flex items-center justify-center">
                           <input
