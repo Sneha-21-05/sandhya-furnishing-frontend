@@ -166,7 +166,7 @@ const ManageTypes = () => {
                     <img
                       src={getImageUrl(type.image_url)}
                       alt={type.type_name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                      className="w-full h-full object-contain p-2 bg-white group-hover:scale-110 transition-transform duration-700 ease-in-out"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 bg-slate-100/50">

@@ -1,4 +1,4 @@
-import {  Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 /* ================= USER PAGES ================= */
@@ -18,6 +18,7 @@ import Orders from "./pages/user/Orders";
 import OrderDetails from "./pages/user/OrderDetails";
 import UserInquiryList from "./pages/user/UserInquiryList";
 import UserConsultations from "./pages/user/UserConsultations";
+import OrderSuccess from "./pages/user/OrderSuccess";
 
 /* ================= USER PRODUCT FLOW ================= */
 import CategoryPage from "./pages/user-products/CategoryPage";
@@ -137,6 +138,7 @@ function App() {
         <Route path="/user/order/:orderId" element={<RequireUserAuth><OrderDetails /></RequireUserAuth>} />
         <Route path="/user/inquiries" element={<RequireUserAuth><UserInquiryList /></RequireUserAuth>} />
         <Route path="/user/consultations" element={<RequireUserAuth><UserConsultations /></RequireUserAuth>} />
+        <Route path="/user/order-success" element={<RequireUserAuth><OrderSuccess /></RequireUserAuth>} />
 
         {/* ================= USER PRODUCT FLOW ================= */}
         <Route path="/categories" element={<CategoryPage />} />
@@ -148,7 +150,7 @@ function App() {
         <Route path="/product/curtains/:id" element={<CurtainDetails />} />
         <Route path="/product/wooden-flooring/:id" element={<WoodenFlooringDetails />} />
         <Route path="/product/pillows/:id" element={<PillowsDetails />} />
-        <Route path="/product/cotton-gadda/:id" element={<CottonGaddaDetails />}/>
+        <Route path="/product/cotton-gadda/:id" element={<CottonGaddaDetails />} />
         <Route path="/product/carpet/:id" element={<CarpetDetails />} />
         {/* ================= ADMIN ROUTES ================= */}
         <Route path="/admin/login" element={<AdminLogin />} />

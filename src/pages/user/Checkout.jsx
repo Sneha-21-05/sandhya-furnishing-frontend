@@ -197,6 +197,10 @@ const Checkout = () => {
     if (!paymentMethod)
       return setPopup({ show: true, message: "Select a payment method" });
 
+    if (paymentMethod !== "quote_request" && !isEmailVerified) {
+      return setPopup({ show: true, message: "Verify email to place order." });
+    }
+
     // QUOTE REQUEST → existing flow
     if (paymentMethod === "quote_request") {
       return submitQuoteRequest();
@@ -205,11 +209,6 @@ const Checkout = () => {
     // COD → existing flow
     if (paymentMethod === "cod") {
       return placeCODOrder();
-    }
-
-    // ONLINE PAYMENT :
-    if (!isEmailVerified) {
-      return setPopup({ show: true, message: "Verify email for online payment." });
     }
 
     return handleOnlinePayment();
@@ -696,7 +695,7 @@ const Checkout = () => {
                             type="radio"
                             name="payment"
                             value={opt.id}
-                            disabled={opt.id !== "cod" && !isEmailVerified}
+                            disabled={!isEmailVerified}
                             checked={paymentMethod === opt.id}
                             onChange={() => setPaymentMethod(opt.id)}
                             className="peer sr-only"
