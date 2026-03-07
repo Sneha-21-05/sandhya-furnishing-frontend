@@ -23,9 +23,9 @@ export const sendEmailOTP = () =>
 export const verifyEmailOTP = (otp) =>
   api.post("/users/verify-email/confirm", { otp });
 
-// =================== RAZORPAY PAYMENT ===================
-export const createRazorpayOrder = (amount) =>
-  api.post("/payment/create-order", { amount });
+// =================== ONLINE PAYMENT ===================
+export const createPaymentOrder = (payload) =>
+  api.post("/payment/create-order", payload);
 
 export const verifyPayment = (data) =>
   api.post("/payment/verify-payment", data);

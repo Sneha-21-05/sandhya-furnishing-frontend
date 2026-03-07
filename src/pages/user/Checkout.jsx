@@ -262,49 +262,79 @@ const Checkout = () => {
     setPlacingOrder(false);
   };
 
-  /* ================= RAZORPAY ONLINE PAYMENT ================= */
+  /* ================= CASHFREE ONLINE PAYMENT ================= */
   const handleOnlinePayment = async () => {
     try {
-      // 1️⃣ Create Razorpay order
+      setPlacingOrder(true);
+      // 1️⃣ Create Cashfree Order Backend
       const res = await api.post("/payment/create-order", {
         amount: parseFloat(total),
+        customerDetails: {
+          phone: shipping.phone || "9999999999",
+          name: `${shipping.firstName} ${shipping.lastName}`.trim() || "Customer"
+        }
       });
 
-      // FIXED 🔥
-      const { id, amount } = res.data.order;
+      if (!res.data.success) {
+        setPlacingOrder(false);
+        return setPopup({ show: true, message: res.data.message || "Failed to initialize payment." });
+      }
 
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-        amount,
-        currency: "INR",
-        order_id: id,
-        name: "Sandhya Furnishing",
-        handler: async (response) => {
-          const verifyRes = await api.post("/payment/verify-payment", {
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_signature: response.razorpay_signature,
-            orderData: {
-              userId: user._id,
-              items,
-              fullName: `${shipping.firstName} ${shipping.lastName}`,
-              phone: shipping.phone,
-              address: `${shipping.address1}, ${shipping.city}, ${shipping.state} - ${shipping.zip}`,
-              paymentMethod: "online",
-              subtotal: parseFloat(subtotal),
-              platformFee,
-              grandTotal: parseFloat(total),
-            },
-          });
+      const { payment_session_id, order_id } = res.data;
 
-          if (verifyRes.data.success) navigate("/user/order-success");
-        },
+      // 2️⃣ Initialize Cashfree SDK Drop-in
+      const cashfree = await window.Cashfree({
+        mode: "sandbox", // Switch to "production" when going live
+      });
+
+      const checkoutOptions = {
+        paymentSessionId: payment_session_id,
+        redirectTarget: "_modal",
       };
-      const rz = new window.Razorpay(options);
-      rz.open();
+
+      // 3️⃣ Open Checkout and handle callback
+      cashfree.checkout(checkoutOptions).then(async (result) => {
+        if (result.error) {
+          console.error(result.error);
+          setPlacingOrder(false);
+          setPopup({ show: true, message: result.error.message || "Payment interrupted. Please try again." });
+        }
+
+        if (result.paymentDetails) {
+          // 4️⃣ Verify Payment on Backend
+          try {
+            const verifyRes = await api.post("/payment/verify-payment", {
+              order_id: order_id,
+              orderData: {
+                userId: user._id,
+                items,
+                fullName: `${shipping.firstName} ${shipping.lastName}`,
+                phone: shipping.phone,
+                address: `${shipping.address1}, ${shipping.city}, ${shipping.state} - ${shipping.zip}`,
+                paymentMethod: "online",
+                subtotal: parseFloat(subtotal),
+                platformFee,
+                grandTotal: parseFloat(total),
+              },
+            });
+
+            if (verifyRes.data.success) {
+              navigate("/user/order-success");
+            } else {
+              setPlacingOrder(false);
+              setPopup({ show: true, message: verifyRes.data.message || "Payment verification failed" });
+            }
+          } catch (err) {
+            console.error(err);
+            setPlacingOrder(false);
+            setPopup({ show: true, message: "Server error during verification." });
+          }
+        }
+      });
     } catch (err) {
       console.error(err);
-      setPopup({ show: true, message: "Payment Failed" });
+      setPlacingOrder(false);
+      setPopup({ show: true, message: "Payment Initialization Failed" });
     }
   };
 
