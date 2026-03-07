@@ -227,7 +227,7 @@ const Checkout = () => {
         paymentMethod: "quote_request",
         subtotal: parseFloat(subtotal),
         platformFee,
-        grandTotal: "To Be Decided",
+        grandTotal: 0,
       });
 
       if (res.data.success) navigate("/user/order-success");
