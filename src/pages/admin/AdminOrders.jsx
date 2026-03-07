@@ -92,10 +92,11 @@ const AdminOrders = () => {
     setFilteredOrders(filtered);
   };
 
-  // 🔥 STRICT STATUS FLOW FUNCTION
   const getNextStatusOptions = (currentStatus) => {
     const flow = [
       "Pending",
+      "Pending Quote",
+      "Pending Payment",
       "Confirmed",
       "Processing",
       "Packed",
@@ -145,7 +146,12 @@ const AdminOrders = () => {
       }
     } catch (err) {
       console.error("Error updating status:", err);
-      toast.error("Invalid status transition");
+      toast.error(err.response?.data?.message || "Failed to update status");
+
+      if (err.response?.status === 401 || err.response?.data?.message === "Invalid token") {
+        localStorage.removeItem("adminToken");
+        window.location.href = "/#/admin-login";
+      }
     }
   };
 

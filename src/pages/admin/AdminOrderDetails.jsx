@@ -50,6 +50,8 @@ const AdminOrderDetails = () => {
   const getNextStatusOptions = (currentStatus) => {
     const flow = [
       "Pending",
+      "Pending Quote",
+      "Pending Payment",
       "Confirmed",
       "Processing",
       "Packed",
@@ -96,7 +98,13 @@ const AdminOrderDetails = () => {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Failed to update status");
+      toast.error(err.response?.data?.message || "Failed to update status");
+
+      // If it's an auth error (401 or 'Invalid token'), handle it
+      if (err.response?.status === 401 || err.response?.data?.message === "Invalid token") {
+        localStorage.removeItem("adminToken");
+        window.location.href = "/#/admin-login";
+      }
     }
   };
 
@@ -129,7 +137,13 @@ const AdminOrderDetails = () => {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Failed to update quote");
+      toast.error(err.response?.data?.message || "Failed to update quote");
+
+      // If it's an auth error (401 or 'Invalid token')
+      if (err.response?.status === 401 || err.response?.data?.message === "Invalid token") {
+        localStorage.removeItem("adminToken");
+        window.location.href = "/#/admin-login";
+      }
     }
   };
 
@@ -157,7 +171,12 @@ const AdminOrderDetails = () => {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Failed to cancel order");
+      toast.error(err.response?.data?.message || "Failed to cancel order");
+
+      if (err.response?.status === 401 || err.response?.data?.message === "Invalid token") {
+        localStorage.removeItem("adminToken");
+        window.location.href = "/#/admin-login";
+      }
     }
   };
 
