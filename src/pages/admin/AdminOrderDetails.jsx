@@ -13,6 +13,7 @@ const AdminOrderDetails = () => {
   const [status, setStatus] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [quotePrice, setQuotePrice] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
@@ -75,6 +76,8 @@ const AdminOrderDetails = () => {
 
   // ================= UPDATE STATUS =================
   const updateStatus = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
     try {
       const token = localStorage.getItem("adminToken");
 
@@ -105,6 +108,8 @@ const AdminOrderDetails = () => {
         localStorage.removeItem("adminToken");
         window.location.href = "/#/admin-login";
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -113,6 +118,9 @@ const AdminOrderDetails = () => {
     if (!quotePrice || isNaN(quotePrice) || quotePrice <= 0) {
       return toast.error("Please enter a valid price");
     }
+
+    if (isLoading) return;
+    setIsLoading(true);
 
     try {
       const token = localStorage.getItem("adminToken");
@@ -144,12 +152,16 @@ const AdminOrderDetails = () => {
         localStorage.removeItem("adminToken");
         window.location.href = "/#/admin-login";
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
 
   // ================= CANCEL ORDER =================
   const handleAdminCancel = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
     try {
       const token = localStorage.getItem("adminToken");
 
@@ -177,6 +189,8 @@ const AdminOrderDetails = () => {
         localStorage.removeItem("adminToken");
         window.location.href = "/#/admin-login";
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -441,9 +455,10 @@ const AdminOrderDetails = () => {
                     </div>
                     <button
                       onClick={handleUpdateQuote}
-                      className="w-full py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 transition-all shadow-md shadow-amber-500/20 active:scale-[0.98]"
+                      disabled={isLoading}
+                      className="w-full py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 transition-all shadow-md shadow-amber-500/20 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      Issue Final Quote
+                      {isLoading ? "Updating..." : "Issue Final Quote"}
                     </button>
                   </div>
                 ) : order.currentStatus === "Pending Payment" ? (
@@ -481,9 +496,10 @@ const AdminOrderDetails = () => {
 
                     <button
                       onClick={updateStatus}
-                      className="w-full py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all shadow-md hover:shadow-lg shadow-blue-500/20 active:scale-[0.98]"
+                      disabled={isLoading}
+                      className="w-full py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-all shadow-md hover:shadow-lg shadow-blue-500/20 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      Apply Status Update
+                      {isLoading ? "Updating..." : "Apply Status Update"}
                     </button>
                   </div>
                 )}
@@ -567,10 +583,11 @@ const AdminOrderDetails = () => {
                   Keep Order
                 </button>
                 <button
-                  className="px-5 py-2.5 bg-rose-600 text-white font-bold rounded-xl hover:bg-rose-700 shadow-md shadow-rose-500/20 active:scale-95 transition-all flex-1"
+                  className="px-5 py-2.5 bg-rose-600 text-white font-bold rounded-xl hover:bg-rose-700 shadow-md shadow-rose-500/20 active:scale-95 transition-all flex-1 disabled:opacity-70 disabled:cursor-not-allowed"
                   onClick={handleAdminCancel}
+                  disabled={isLoading}
                 >
-                  Confirm Cancel
+                  {isLoading ? "Cancelling..." : "Confirm Cancel"}
                 </button>
               </div>
             </div>

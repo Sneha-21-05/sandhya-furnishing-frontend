@@ -189,7 +189,7 @@ const AdminDashboard = () => {
             </h2>
 
             <div className="h-[320px]">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minHeight={320}>
                 <AreaChart data={formattedRevenueData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                   <defs>
                     <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
@@ -237,7 +237,7 @@ const AdminDashboard = () => {
 
             <div className="h-[320px] flex items-center justify-center">
               {formattedStatusData.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" minHeight={320}>
                   <PieChart>
                     <Pie
                       data={formattedStatusData}
@@ -349,9 +349,9 @@ const AdminDashboard = () => {
                       <td className="py-4 px-6 md:px-8">
                         <span
                           className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full tracking-wide ${order.currentStatus === "Delivered" ? "bg-emerald-100 text-emerald-700" :
-                              order.currentStatus === "Cancelled" ? "bg-rose-100 text-rose-700" :
-                                order.currentStatus === "Pending" ? "bg-amber-100 text-amber-700" :
-                                  "bg-blue-100 text-blue-700"
+                            order.currentStatus === "Cancelled" ? "bg-rose-100 text-rose-700" :
+                              order.currentStatus === "Pending" ? "bg-amber-100 text-amber-700" :
+                                "bg-blue-100 text-blue-700"
                             }`}
                         >
                           {order.currentStatus}
