@@ -23,6 +23,10 @@ const Signup = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
 
+  const [showOTP, setShowOTP] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [tempUserId, setTempUserId] = useState(null);
+
   const handleChange = (e) => {
     setForm((prev) => ({
       ...prev,
@@ -63,15 +67,65 @@ const Signup = () => {
     try {
       setLoading(true);
 
-      await api.post("/users/register", {
+      const res = await api.post("/users/send-signup-otp", {
         fullname: form.name,
         email: form.email,
         phone: form.phone,
         password: form.password,
       });
 
-      setMessage("Signup successful! Redirecting to login...");
+      if (res.data.success) {
+        setTempUserId(res.data.tempUserId);
+        setShowOTP(true);
+        setMessage(res.data.message || "OTP sent to your email.");
+        setMessageType("success");
+      }
+    } catch (err) {
+      const msg =
+        err.response?.data?.message ||
+        "Registration failed. Please try again.";
+
+      setMessage(msg);
+      setMessageType("error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOTP = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (!otp || otp.length < 6) {
+      setMessage("Please enter a valid 6-digit OTP.");
+      setMessageType("error");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await api.post("/users/verify-signup-otp", {
+        tempUserId,
+        otp,
+      });
+
+      setMessage("Account verified! Redirecting to login...");
       setMessageType("success");
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+      });
+      setOtp("");
+      setShowOTP(false);
+
+      setTimeout(() => {
+        navigate("/login", { state: { from: fromLocation } });
+      }, 1500);
 
       setForm({
         name: "",
@@ -122,75 +176,94 @@ const Signup = () => {
             {message && (
               <div
                 className={`mb-6 p-4 rounded-xl text-sm border ${messageType === "success"
-                    ? "bg-green-50 text-green-700 border-green-200"
-                    : "bg-red-50 text-red-600 border-red-100"
+                  ? "bg-green-50 text-green-700 border-green-200"
+                  : "bg-red-50 text-red-600 border-red-100"
                   }`}
               >
                 {message}
               </div>
             )}
 
-            <form onSubmit={handleSignup} className="space-y-5">
-
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
-                value={form.name}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
-                value={form.email}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
-                value={form.phone}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
-                value={form.password}
-                onChange={handleChange}
-                required
-              />
-
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                required
-              />
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-4 mt-4 bg-slate-900 hover:bg-blue-600 text-white rounded-xl transition-all duration-300 disabled:opacity-70"
-              >
-                {loading ? "Creating Account..." : "Create Account"}
-              </button>
-
-            </form>
+            {!showOTP ? (
+              <form onSubmit={handleSignup} className="space-y-5">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
+                  value={form.phone}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-4 mt-4 bg-slate-900 hover:bg-blue-600 text-white rounded-xl transition-all duration-300 disabled:opacity-70"
+                >
+                  {loading ? "Sending OTP..." : "Get OTP"}
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleVerifyOTP} className="space-y-5">
+                <div className="text-center mb-4">
+                  <p className="text-sm font-semibold text-slate-600">
+                    We sent a 6-digit code to <span className="text-blue-600 font-bold">{form.email}</span>
+                  </p>
+                </div>
+                <input
+                  type="text"
+                  maxLength="6"
+                  placeholder="Enter 6-Digit Verification Code"
+                  className="w-full text-center tracking-widest text-2xl font-bold bg-slate-50 border border-slate-200 p-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+                  required
+                />
+                <button
+                  type="submit"
+                  disabled={loading || otp.length < 6}
+                  className="w-full py-4 mt-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-all duration-300 disabled:opacity-70"
+                >
+                  {loading ? "Verifying..." : "Verify & Create Account"}
+                </button>
+              </form>
+            )}
 
             <div className="mt-8 text-center">
               <p className="text-gray-500 text-sm">
