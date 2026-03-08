@@ -32,18 +32,72 @@ const OrderDetails = () => {
 
     try {
       setPaying(true);
-      const res = await api.post(`/orders/user/pay-quote/${orderId}`, {
-        paymentMethod: selectedPayment
+
+      // Create Cashfree session for this amount
+      const sessionRes = await api.post("/payment/create-order", {
+        amount: parseFloat(order.grandTotal),
+        customerDetails: {
+          name: order.fullName,
+          phone: order.phone,
+          email: "customer@sandhyafurnishing.com" 
+        }
       });
 
-      if (res.data.success) {
-        toast.success("Payment successful! Order is now confirmed.");
-        loadOrderDetails();
+      if (!sessionRes.data.success) {
+        setPaying(false);
+        return toast.error(sessionRes.data.message || "Failed to initiate payment");
       }
+
+      const { payment_session_id, order_id } = sessionRes.data;
+
+      // Import load dynamically to avoid top-level issues if the package is missing on build
+      const { load } = await import('@cashfreepayments/cashfree-js');
+      const cashfree = await load({ mode: "sandbox" });
+
+      const checkoutOptions = {
+        paymentSessionId: payment_session_id,
+        redirectTarget: "_modal",
+      };
+
+      cashfree.checkout(checkoutOptions).then(async (result) => {
+        if (result.error) {
+          console.error("Cashfree Payment Error:", result.error);
+          toast.error("Payment Failed or Cancelled.");
+          setPaying(false);
+        } else if (result.paymentDetails) {
+            console.log("Payment Details:", result.paymentDetails);
+            // Verify payment
+            const verifyRes = await api.post("/payment/verify-quote-payment", {
+                order_id: order_id, 
+                dbOrderId: order._id,
+                paymentMethod: selectedPayment
+            });
+            if (verifyRes.data.success) {
+                toast.success("Payment successful! Order is now confirmed.");
+                loadOrderDetails();
+            } else {
+                toast.error(verifyRes.data.message || "Payment verification failed.");
+            }
+        } else {
+           // Fallback verification if they close popup but it succeeded
+            const verifyRes = await api.post("/payment/verify-quote-payment", {
+                order_id: order_id, 
+                dbOrderId: order._id,
+                paymentMethod: selectedPayment
+            });
+            if (verifyRes.data.success) {
+                toast.success("Payment successful! Order is now confirmed.");
+                loadOrderDetails();
+            } else {
+                 toast.error("Payment was not completed.");
+                 setPaying(false);
+            }
+        }
+      });
+
     } catch (err) {
       console.error(err);
-      toast.error(err.response?.data?.message || "Payment attempt failed.");
-    } finally {
+      toast.error(err.response?.data?.message || err.message || "Payment attempt failed.");
       setPaying(false);
     }
   };
@@ -407,3 +461,5 @@ const OrderDetails = () => {
 };
 
 export default OrderDetails;
+
+

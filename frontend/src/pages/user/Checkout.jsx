@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
 import { MapPin, Receipt, CreditCard, CheckCircle2, ChevronRight, ArrowLeft, Package, Truck, Banknote, Building, Smartphone } from "lucide-react";
+import { load } from '@cashfreepayments/cashfree-js';
 
 const BACKEND_URL = "https://sandhya-furnishing-backend.onrender.com";
 
@@ -264,52 +265,70 @@ const Checkout = () => {
     setPlacingOrder(false);
   };
 
-  /* ================= RAZORPAY ONLINE PAYMENT ================= */
+  /* ================= CASHFREE ONLINE PAYMENT ================= */
   const handleOnlinePayment = async () => {
-  try {
-    // 1️⃣ Create Razorpay order
-    const res = await api.post("/payment/create-order", {
-      amount: parseFloat(total),
-    });
+    try {
+      setPlacingOrder(true);
+      // 1?? Create Cashfree order session on our backend
+      const res = await api.post("/payment/create-order", {
+        amount: parseFloat(total),
+        customerDetails: {
+          name: `${shipping.firstName} ${shipping.lastName}`,
+          phone: shipping.phone,
+          email: user?.email || "customer@sandhyafurnishing.com"
+        }
+      });
 
-    // FIXED 🔥
-    const { id, amount } = res.data.order;
+      if (!res.data.success) {
+        setPlacingOrder(false);
+        return setPopup({ show: true, message: res.data.message || "Failed to initiate payment" });
+      }
 
-    const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID,  
-      amount,
-      currency: "INR",
-      order_id: id,
-      name: "Sandhya Furnishing",
-      handler: async (response) => {
-        const verifyRes = await api.post("/payment/verify-payment", {
-          razorpay_payment_id: response.razorpay_payment_id,
-          razorpay_order_id: response.razorpay_order_id,
-          razorpay_signature: response.razorpay_signature,
-          orderData: {
-            userId: user._id,
-            items,
-            fullName: `${shipping.firstName} ${shipping.lastName}`,
-            phone: shipping.phone,
-            address: `${shipping.address1}, ${shipping.city}, ${shipping.state} - ${shipping.zip}`,
-            paymentMethod: "online",
-            subtotal: parseFloat(subtotal),
-            platformFee,
-            grandTotal: parseFloat(total),
-          },
-        });
+      const { payment_session_id, order_id } = res.data;
 
-        if (verifyRes.data.success) navigate("/user/order-success");
-      },
-    };
-    const rz = new window.Razorpay(options);
-    rz.open();
-  } catch (err) {
-    console.error(err);
-    setPopup({ show: true, message: "Payment Failed" });
-  }
-};
+      // 2?? Initialize Cashfree SDK
+      const cashfree = await load({
+        mode: "sandbox", 
+      });
 
+      // 3?? Open Cashfree Checkout Modal
+      const checkoutOptions = {
+        paymentSessionId: payment_session_id,
+        returnUrl: `${window.location.origin}/#/user/order-success?order_id={order_id}&verify=true`,
+      };
+      
+      localStorage.setItem("pendingCheckoutData", JSON.stringify({
+        order_id,
+        orderData: {
+          userId: user._id,
+          items,
+          fullName: `${shipping.firstName} ${shipping.lastName}`,
+          phone: shipping.phone,
+          address: `${shipping.address1}, ${shipping.city}, ${shipping.state} - ${shipping.zip}`,
+          paymentMethod: "online",
+          subtotal: parseFloat(subtotal),
+          platformFee,
+          grandTotal: parseFloat(total),
+        }
+      }));
+
+      cashfree.checkout(checkoutOptions).then((result) => {
+        if (result.error) {
+          console.error("Cashfree Payment Error:", result.error);
+          setPopup({ show: true, message: "Payment Failed or Cancelled." });
+          setPlacingOrder(false);
+        }
+        if (result.redirect) {
+          console.log("Payment will be redirected");
+        }
+      });
+
+    } catch (err) {
+      console.error(err);
+      setPopup({ show: true, message: "Payment Initialization Failed" });
+      setPlacingOrder(false);
+    }
+  };
 
   const steps = [
     { num: 1, label: "Shipping", icon: MapPin },
@@ -653,14 +672,14 @@ const Checkout = () => {
                         }`}
                     >
                       <div className="mt-1 relative flex items-center justify-center">
-                       <input
-                        type="radio"
-                        name="payment"
-                        value="quote_request"
-                        checked={paymentMethod === "quote_request"}
-                        onChange={() => setPaymentMethod("quote_request")}
-                        className="peer sr-only"
-                      />
+                        <input
+                          type="radio"
+                          name="payment"
+                          value="quote_request"
+                          checked={paymentMethod === "quote_request"}
+                          onChange={() => setPaymentMethod("quote_request")}
+                          className="peer sr-only"
+                        />
                         <div className={`w-5 h-5 rounded-full border-2 transition-all ${paymentMethod === 'quote_request' ? 'border-[#9B804E] border-4' : 'border-gray-300'
                           }`}></div>
                       </div>
@@ -696,14 +715,14 @@ const Checkout = () => {
                       >
                         <div className="mt-1 relative flex items-center justify-center">
                           <input
-                          type="radio"
-                          name="payment"
-                          value={opt.id}
-                          disabled={opt.id !== "cod" && !isEmailVerified}
-                          checked={paymentMethod === opt.id}
-                          onChange={() => setPaymentMethod(opt.id)}
-                          className="peer sr-only"
-                        />
+                            type="radio"
+                            name="payment"
+                            value={opt.id}
+                            disabled={opt.id !== "cod" && !isEmailVerified}
+                            checked={paymentMethod === opt.id}
+                            onChange={() => setPaymentMethod(opt.id)}
+                            className="peer sr-only"
+                          />
                           <div className={`w-5 h-5 rounded-full border-2 transition-all ${paymentMethod === opt.id ? 'border-[#9B804E] border-4' : 'border-gray-300'
                             }`}></div>
                         </div>
@@ -799,3 +818,7 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+
+
+
