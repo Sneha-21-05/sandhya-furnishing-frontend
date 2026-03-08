@@ -301,7 +301,7 @@ const OrderDetails = () => {
                           <CreditCard size={18} className="text-[#9B804E]" />
                           Complete Payment
                         </h4>
-                        <div className="grid grid-cols-3 gap-3 mb-6">
+                        <div className="flex flex-col gap-3 mb-6">
                           {["upi", "card", "netbanking"].map((method) => (
                             <button
                               key={method}
