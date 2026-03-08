@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../../api";
 import DashboardLayout from "../../components/DashboardLayout";
-import { ArrowLeft, MapPin, Phone, CreditCard, Clock, Package, CheckCircle, Truck, FileText } from "lucide-react";
+import { ArrowLeft, MapPin, Phone, CreditCard, Clock, Package, CheckCircle, Truck, FileText, Smartphone, Building, Banknote } from "lucide-react";
 import toast from "react-hot-toast";
 
 const OrderDetails = () => {
@@ -461,5 +461,6 @@ const OrderDetails = () => {
 };
 
 export default OrderDetails;
+
 
 
