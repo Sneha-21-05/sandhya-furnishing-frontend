@@ -48,7 +48,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem("adminToken");
 
-      const res = await api.get("/orders/admin/analytics", {
+      const res = await api.get(`/orders/admin/analytics?t=${new Date().getTime()}`, {
         headers: { Authorization: token },
       });
 
@@ -75,7 +75,7 @@ const AdminDashboard = () => {
     try {
       const token = localStorage.getItem("adminToken");
 
-      const res = await api.get("/orders/admin/status-count", {
+      const res = await api.get(`/orders/admin/status-count?t=${new Date().getTime()}`, {
         headers: { Authorization: token },
       });
 

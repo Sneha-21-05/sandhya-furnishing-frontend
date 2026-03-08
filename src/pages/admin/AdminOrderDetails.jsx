@@ -28,7 +28,7 @@ const AdminOrderDetails = () => {
       const token = localStorage.getItem("adminToken");
 
       const res = await api.get(
-        `/orders/details/${orderId}`,
+        `/orders/details/${orderId}?t=${new Date().getTime()}`,
         {
           headers: {
             Authorization: token,

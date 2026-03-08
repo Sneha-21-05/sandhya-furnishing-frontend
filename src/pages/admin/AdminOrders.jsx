@@ -52,7 +52,7 @@ const AdminOrders = () => {
     try {
       const token = localStorage.getItem("adminToken");
 
-      const res = await api.get("/orders/admin/all", {
+      const res = await api.get(`/orders/admin/all?t=${new Date().getTime()}`, {
         headers: { Authorization: token },
       });
 
