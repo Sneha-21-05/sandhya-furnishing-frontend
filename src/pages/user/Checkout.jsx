@@ -295,9 +295,10 @@ const Checkout = () => {
       // 3️⃣ Open Checkout and handle callback
       cashfree.checkout(checkoutOptions).then(async (result) => {
         if (result.error) {
-          console.error(result.error);
+          console.error("Cashfree Error:", result.error);
           setPlacingOrder(false);
           setPopup({ show: true, message: result.error.message || "Payment interrupted. Please try again." });
+          return;
         }
 
         if (result.paymentDetails) {
@@ -329,6 +330,9 @@ const Checkout = () => {
             setPlacingOrder(false);
             setPopup({ show: true, message: "Server error during verification." });
           }
+        } else {
+          // Fallback if no error and no paymentDetails (User closed popup manually)
+          setPlacingOrder(false);
         }
       });
     } catch (err) {
@@ -759,30 +763,36 @@ const Checkout = () => {
                   <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100 sticky top-24">
                     <h3 className="text-lg font-bold text-[#142C2C] mb-6 border-b border-gray-200 pb-4">Final Review</h3>
 
-                    <div className="space-y-4 text-sm text-gray-600 mb-6">
-                      <div className="flex justify-between items-center">
-                        <span>Subtotal</span>
-                        <span className="font-medium text-gray-800">₹{parseFloat(subtotal).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <span>Platform Fee</span>
-                        <span className="font-medium text-gray-800">₹{platformFee.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-                      </div>
-
-                      {paymentMethod === "cod" && (
-                        <div className="flex justify-between items-center text-orange-600 bg-orange-50 p-2 -mx-2 rounded-lg">
-                          <span className="flex items-center gap-1.5"><Banknote size={14} /> COD Fee</span>
-                          <span className="font-bold">+ ₹100.00</span>
+                    {!hasCustomSize ? (
+                      <div className="space-y-4 text-sm text-gray-600 mb-6">
+                        <div className="flex justify-between items-center">
+                          <span>Subtotal</span>
+                          <span className="font-medium text-gray-800">₹{parseFloat(subtotal).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                         </div>
-                      )}
-                    </div>
+
+                        <div className="flex justify-between items-center">
+                          <span>Platform Fee</span>
+                          <span className="font-medium text-gray-800">₹{platformFee.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                        </div>
+
+                        {paymentMethod === "cod" && (
+                          <div className="flex justify-between items-center text-orange-600 bg-orange-50 p-2 -mx-2 rounded-lg">
+                            <span className="flex items-center gap-1.5"><Banknote size={14} /> COD Fee</span>
+                            <span className="font-bold">+ ₹100.00</span>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="p-4 mb-6 bg-[#9B804E]/10 border border-[#9B804E]/20 text-[#9B804E] rounded-xl text-sm font-medium">
+                        Since your cart contains a custom-sized item, our team will review the dimensions and provide a final price quote.
+                      </div>
+                    )}
 
                     <div className="pt-4 border-t border-gray-200 border-dashed flex justify-between items-end mb-8">
                       <div>
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">Total to Pay</span>
                       </div>
-                      <span className="text-3xl font-bold text-[#142C2C]">
+                      <span className={`font-bold text-[#142C2C] ${hasCustomSize ? "text-xl" : "text-3xl"}`}>
                         {displayTotal}
                       </span>
                     </div>
