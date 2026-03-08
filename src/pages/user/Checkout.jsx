@@ -271,7 +271,8 @@ const Checkout = () => {
         amount: parseFloat(total),
         customerDetails: {
           phone: shipping.phone || "9999999999",
-          name: `${shipping.firstName} ${shipping.lastName}`.trim() || "Customer"
+          name: `${shipping.firstName} ${shipping.lastName}`.trim() || "Customer",
+          email: user?.email
         }
       });
 
