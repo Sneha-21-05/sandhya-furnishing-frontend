@@ -97,7 +97,7 @@ const AdminOrderDetails = () => {
       if (res.data.success) {
         toast.success("Order status updated!");
         setNewMessage("");
-        setOrder(res.data.order);
+        setOrder((prev) => ({ ...prev, ...res.data.order, userId: prev?.userId }));
         setStatus(res.data.order.currentStatus);
       }
     } catch (err) {
@@ -142,7 +142,7 @@ const AdminOrderDetails = () => {
       if (res.data.success) {
         toast.success("Quote finalized!");
         setNewMessage("");
-        setOrder(res.data.order);
+        setOrder((prev) => ({ ...prev, ...res.data.order, userId: prev?.userId }));
         setStatus(res.data.order.currentStatus);
       }
     } catch (err) {
@@ -181,7 +181,7 @@ const AdminOrderDetails = () => {
         toast.success("Order cancelled successfully!");
         setCancelReason("");
         setShowCancelPopup(false);
-        setOrder(res.data.order);
+        setOrder((prev) => ({ ...prev, ...res.data.order, userId: prev?.userId }));
         setStatus(res.data.order.currentStatus);
       }
     } catch (err) {

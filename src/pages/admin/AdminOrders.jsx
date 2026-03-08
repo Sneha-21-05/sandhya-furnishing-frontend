@@ -136,20 +136,17 @@ const AdminOrders = () => {
       if (res.data.success) {
         toast.success("Status updated successfully");
 
-        const updated = orders.map((o) =>
-          o._id === orderId
-            ? { ...o, currentStatus: newStatus }
-            : o
+        const updatedOrders = orders.map((o) =>
+          o._id === orderId ? { ...o, ...res.data.order, userId: o.userId } : o
         );
 
         const updatedFiltered = filteredOrders.map((o) =>
-          o._id === orderId
-            ? { ...o, currentStatus: newStatus }
-            : o
+          o._id === orderId ? { ...o, ...res.data.order, userId: o.userId } : o
         );
-
-        setOrders(updated);
+        setOrders(updatedOrders);
         setFilteredOrders(updatedFiltered);
+
+
       }
     } catch (err) {
       console.error("Error updating status:", err);
