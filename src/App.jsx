@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 import Services from "./pages/Services";
 import BookConsultation from "./pages/BookConsultation";
 import RequireUserAuth from "./pages/RequireUserAuth";
@@ -125,6 +126,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/services" element={<Services />} />
         <Route path="/book-consultation" element={<RequireUserAuth><BookConsultation /></RequireUserAuth>} />
 

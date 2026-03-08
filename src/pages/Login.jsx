@@ -13,7 +13,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [info, setInfo] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -53,22 +52,7 @@ const Login = () => {
     }
   };
 
-  const handleForgotPassword = async () => {
-    setError("");
-    setInfo("");
 
-    if (!email) {
-      setError("Please enter your email first.");
-      return;
-    }
-
-    try {
-      await api.post("/users/forgot-password", { email });
-      setInfo("Password reset link has been sent to your email.");
-    } catch (err) {
-      setError("Unable to send reset link. Try again later.");
-    }
-  };
 
   return (
     <>
@@ -97,11 +81,7 @@ const Login = () => {
               </div>
             )}
 
-            {info && (
-              <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-xl text-sm border border-green-100">
-                {info}
-              </div>
-            )}
+
 
             <form onSubmit={handleSubmit} className="space-y-5">
 
@@ -125,13 +105,12 @@ const Login = () => {
                 />
 
                 <div className="text-right mt-2">
-                  <button
-                    type="button"
-                    onClick={handleForgotPassword}
+                  <Link
+                    to="/forgot-password"
                     className="text-sm text-blue-600 hover:text-blue-800 font-medium"
                   >
                     Forgot Password?
-                  </button>
+                  </Link>
                 </div>
               </div>
 
