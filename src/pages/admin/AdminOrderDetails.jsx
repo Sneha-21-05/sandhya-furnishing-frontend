@@ -97,7 +97,8 @@ const AdminOrderDetails = () => {
       if (res.data.success) {
         toast.success("Order status updated!");
         setNewMessage("");
-        loadOrder();
+        setOrder(res.data.order);
+        setStatus(res.data.order.currentStatus);
       }
     } catch (err) {
       console.error(err);
@@ -141,7 +142,8 @@ const AdminOrderDetails = () => {
       if (res.data.success) {
         toast.success("Quote finalized!");
         setNewMessage("");
-        loadOrder();
+        setOrder(res.data.order);
+        setStatus(res.data.order.currentStatus);
       }
     } catch (err) {
       console.error(err);
@@ -179,7 +181,8 @@ const AdminOrderDetails = () => {
         toast.success("Order cancelled successfully!");
         setCancelReason("");
         setShowCancelPopup(false);
-        loadOrder();
+        setOrder(res.data.order);
+        setStatus(res.data.order.currentStatus);
       }
     } catch (err) {
       console.error(err);
