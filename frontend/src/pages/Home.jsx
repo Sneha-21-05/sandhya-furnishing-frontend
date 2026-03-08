@@ -124,40 +124,42 @@ const Home = () => {
 
         {/* ================= OUR SERVICES (BESPOKE) ================= */}
         <section className="bg-slate-50 py-24 mb-24">
-          <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col lg:flex-row items-center gap-16">
-            <div className="lg:w-1/2 relative">
-              <div className="absolute -inset-4 bg-white shadow-lg rounded-2xl transform -rotate-2"></div>
-              <img
-                src="/images/curtain.jpg"
-                alt="Bespoke Services"
-                className="relative w-full h-[500px] object-cover rounded-xl shadow-md grayscale hover:grayscale-0 transition duration-700"
-              />
+          <div className="max-w-7xl mx-auto px-6 md:px-16">
+
+            <div className="text-center mb-16">
+              <p className="text-blue-600 font-semibold tracking-widest uppercase text-sm mb-4">Tailored to You</p>
+              <h2 className="text-3xl md:text-5xl font-light text-slate-800 leading-tight mb-6">
+                Bespoke Design & Custom Fittings
+              </h2>
+              <p className="text-gray-600 text-lg max-w-3xl mx-auto font-light">
+                Every home is unique. That's why we offer personalized consultations and custom measurements to ensure your furnishings fit perfectly. From selection to installation, our experts handle every detail.
+              </p>
             </div>
 
-            <div className="lg:w-1/2">
-              <p className="text-blue-600 font-semibold tracking-widest uppercase text-sm mb-4">Tailored to You</p>
-              <h2 className="text-3xl md:text-5xl font-light text-slate-800 leading-tight mb-8">
-                Bespoke Design &<br />Custom Fittings
-              </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-10 font-light">
-                Every home is unique. That's why we offer personalized consultations and custom measurements
-                to ensure your furnishings fit perfectly. From selection to installation, our experts handle every detail.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+              {[
+                { title: "Custom Curtains", desc: "Expert tailoring and fitting for any window size or style.", icon: "🧵", img: "/images/curtain.jpg" },
+                { title: "Sofa Upholstery", desc: "Revive your living space with premium fabrics and craftsmanship.", icon: "🛋️", img: "/images/sofa.jpg" },
+                { title: "Premium Mattresses", desc: "Experience ultimate comfort customized to your sleep needs.", icon: "🛏️", img: "/images/mattress.jpg" },
+                { title: "Wallpapers & Blinds", desc: "Transform your walls and windows with curated designer collections.", icon: "🎨", img: "/images/pillow.jpg" }
+              ].map((service, i) => (
+                <div key={i} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group border border-gray-100 flex flex-col h-full">
+                  <div className="relative h-48 overflow-hidden bg-slate-100">
+                    <img src={service.img} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 text-3xl">{service.icon}</div>
+                  </div>
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h3 className="text-xl font-medium text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+                    <p className="text-gray-600 text-sm font-light leading-relaxed flex-grow">
+                      {service.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-              <ul className="space-y-4 mb-10">
-                {[
-                  "In-home design consultation",
-                  "Precise custom measurements",
-                  "Extensive fabric library access",
-                  "Professional installation"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center text-slate-700">
-                    <svg className="w-5 h-5 text-blue-500 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
+            <div className="text-center">
               <button
                 onClick={() => navigate("/book-consultation")}
                 className="px-8 py-3 bg-slate-900 hover:bg-blue-600 text-white font-medium rounded-sm transition duration-300 tracking-wide text-sm uppercase"
