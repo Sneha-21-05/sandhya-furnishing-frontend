@@ -234,7 +234,7 @@ const SofaDetails = () => {
   if (!product)
     return <p className="p-10 text-center">Sofa not found</p>;
 
-  const dimensionImage = getImageUrl(product.dimensionImage);
+  const dimensionImages = product.dimensionImages?.map(getImageUrl) || [];
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans text-gray-800 flex flex-col pt-8">
@@ -408,9 +408,9 @@ const SofaDetails = () => {
             )}
           </div>
 
-          {/* DIMENSION IMAGE */}
-          {dimensionImage ? (
-            <div className="bg-[#142C2C] rounded-[2rem] shadow-[0_8px_30px_rgba(20,44,44,0.15)] p-8 sm:p-10 text-white relative overflow-hidden group flex flex-col justify-center">
+          {/* DIMENSION IMAGES */}
+          {dimensionImages.length > 0 ? (
+            <div className="bg-[#142C2C] rounded-[2rem] shadow-[0_8px_30px_rgba(20,44,44,0.15)] p-8 sm:p-10 text-white relative overflow-hidden group flex flex-col">
               <div className="absolute top-0 right-0 w-80 h-80 bg-[#9B804E]/20 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none transition-transform duration-700 group-hover:scale-110"></div>
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
 
@@ -418,12 +418,19 @@ const SofaDetails = () => {
                 <span className="w-6 h-1 bg-[#9B804E] rounded-full"></span> Measurements
               </h2>
 
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 relative z-10 w-full flex-1 flex items-center justify-center">
-                <img
-                  src={dimensionImage}
-                  alt="Dimensions"
-                  className="w-full h-auto max-h-[300px] object-contain rounded-lg filter drop-shadow-2xl opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
-                />
+              <div className="relative z-10 w-full flex-1">
+                <div className={`grid gap-6 ${dimensionImages.length === 1 ? 'grid-cols-1' : dimensionImages.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+                  {dimensionImages.map((img, idx) => (
+                    <div key={idx} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 flex items-center justify-center">
+                      <img
+                        src={img}
+                        alt={`Dimension ${idx + 1}`}
+                        className="w-full h-auto max-h-[300px] object-contain rounded-lg filter drop-shadow-2xl opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-500 ease-out cursor-pointer"
+                        onClick={() => window.open(img, '_blank')}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
