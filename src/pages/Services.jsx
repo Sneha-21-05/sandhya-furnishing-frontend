@@ -40,60 +40,6 @@ const Services = () => {
           </div>
         </section>
 
-        {/* ================= DYNAMIC SERVICES GRID ================= */}
-        <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-blue-600 font-semibold tracking-widest uppercase text-sm mb-2">What We Offer</p>
-            <h2 className="text-3xl md:text-5xl font-light tracking-wide text-slate-900">
-              Premium Furnishing Solutions
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {services.length > 0 ? (
-              services.map((item, index) => (
-                <div
-                  key={index}
-                  className="group rounded-2xl overflow-hidden bg-slate-50 hover:bg-white border border-transparent hover:border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col"
-                >
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={item.image_url || "/images/sofa.jpg"}
-                      alt={item.service_name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
-                    {item.price && (
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-semibold text-slate-900 shadow-sm">
-                        Starts at ₹{item.price}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="p-8 flex flex-col flex-grow">
-                    <h3 className="text-2xl font-medium text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                      {item.service_name}
-                    </h3>
-                    <p className="text-gray-500 font-light leading-relaxed flex-grow mb-6">
-                      {item.description || "Experience our premium and tailored services to elevate your living spaces."}
-                    </p>
-                    <button
-                      onClick={() => navigate("/book-consultation")}
-                      className="flex items-center text-sm font-semibold tracking-wide uppercase text-slate-900 group-hover:text-blue-600 transition-colors"
-                    >
-                      Book Now <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
-                    </button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full py-20 text-center bg-slate-50 rounded-2xl border border-gray-100">
-                <p className="text-gray-500 text-lg">Loading our premium services...</p>
-              </div>
-            )}
-          </div>
-        </section>
-
         {/* ================= OUR PROCESS ================= */}
         <section className="bg-slate-900 py-16 px-6 md:px-16 text-white text-center">
           <div className="max-w-6xl mx-auto">
