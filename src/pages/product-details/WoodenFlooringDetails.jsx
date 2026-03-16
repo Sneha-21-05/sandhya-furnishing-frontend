@@ -308,6 +308,19 @@ const WoodenFlooringDetails = () => {
             </div>
           </section>
 
+          {/* DIMENSION IMAGES GALLERY */}
+          {dimensionImages.length > 0 && (
+            <section className="lg:col-span-3 mt-4 pt-10 border-t border-gray-100">
+              <div className="flex items-center gap-2 mb-6">
+                <div className="w-2 h-2 rounded-full bg-[#0a2328]"></div>
+                <h2 className="text-xl font-extrabold tracking-[0.05em] text-[#0a2328] uppercase">Measurements & Layout Reference</h2>
+              </div>
+              <div className="bg-white rounded-[1.5rem] border border-gray-100 p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+                <ImageGallery images={dimensionImages} />
+              </div>
+            </section>
+          )}
+
           {/* ================= DESCRIPTION ================= */}
           <section className="lg:col-span-1 bg-[#142C2C] rounded-[2rem] p-8 text-white relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>

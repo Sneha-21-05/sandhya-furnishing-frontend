@@ -126,7 +126,7 @@ const CarpetDetails = () => {
 
           {/* IMAGES */}
           <div>
-            <ImageGallery images={[...(product.images || []), ...(product.dimensionImages || [])]} />
+            <ImageGallery images={product.images?.map(getImageUrl) || []} />
           </div>
 
           {/* RIGHT SIDE */}
@@ -261,6 +261,19 @@ const CarpetDetails = () => {
               )}
             </div>
           </div>
+
+          {/* DIMENSION IMAGES GALLERY */}
+          {dimensionImages.length > 0 && (
+            <div className="mt-8 pt-8 border-t border-gray-100">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
+                <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">Measurements & Dimensions</span>
+              </div>
+              <div className="bg-white rounded-[1.5rem] border border-gray-100 p-4 shadow-sm">
+                <ImageGallery images={dimensionImages} />
+              </div>
+            </div>
+          )}
 
         </section>
 
