@@ -219,10 +219,14 @@ const Signup = () => {
                 <input
                   type="tel"
                   name="phone"
+                  maxLength="10"
                   placeholder="Phone Number"
                   className="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
                   value={form.phone}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    const obj = { target: { name: 'phone', value: e.target.value.replace(/\D/g, '') } };
+                    handleChange(obj);
+                  }}
                   required
                 />
                 <input
