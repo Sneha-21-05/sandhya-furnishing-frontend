@@ -98,7 +98,6 @@ const AdminInquiryPremium = () => {
   const completed = inquiries.filter((i) => i.status === "completed").length;
   const unread = inquiries.filter((i) => !i.seenByAdmin).length;
   const generalCount = inquiries.filter((i) => i.type === "general").length;
-  const customCount = inquiries.filter((i) => i.type === "custom_size").length;
 
   const filteredInquiries = inquiries.filter((inq) => {
     const name = inq.name?.toLowerCase() || "";
@@ -157,7 +156,6 @@ const AdminInquiryPremium = () => {
           <StatCard title="Resolved" value={completed} active={filter === "completed"} onClick={() => setFilter("completed")} color="emerald" icon={<CheckCircle size={16} />} />
           <StatCard title="Unread" value={unread} active={filter === "unread"} onClick={() => setFilter("unread")} color="red" icon={<Mail size={16} />} />
           <StatCard title="General" value={generalCount} active={filter === "general"} onClick={() => setFilter("general")} color="blue" icon={<MessageSquare size={16} />} />
-          <StatCard title="Custom Size" value={customCount} active={filter === "custom"} onClick={() => setFilter("custom")} color="purple" icon={<Maximize size={16} />} />
 
           <StatCard
             title="Refurbish"
