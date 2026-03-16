@@ -95,7 +95,7 @@ const Services = () => {
         </section>
 
         {/* ================= OUR PROCESS ================= */}
-        <section className="bg-slate-900 py-24 px-6 md:px-16 text-white text-center">
+        <section className="bg-slate-900 py-16 px-6 md:px-16 text-white text-center">
           <div className="max-w-6xl mx-auto">
             <p className="text-blue-400 font-semibold tracking-widest uppercase text-sm mb-4">How It Works</p>
             <h2 className="text-3xl md:text-5xl font-light mb-16 tracking-wide">
@@ -123,7 +123,7 @@ const Services = () => {
 
 
         {/* ================= ALL SERVICES LISTING ================= */}
-        <section className="bg-white py-24 px-6 md:px-16 text-slate-800 border-t border-gray-100">
+        <section className="bg-white py-16 px-6 md:px-16 text-slate-800 border-t border-gray-100">
           <div className="max-w-7xl mx-auto">
              <div className="text-center mb-16">
               <p className="text-blue-600 font-semibold tracking-widest uppercase text-sm mb-2">Our Expertise</p>
@@ -157,7 +157,7 @@ const Services = () => {
         </section>
 
         {/* ================= CTA SECTION ================= */}
-        <section className="py-24 px-6 md:px-16 bg-[#faf7f2] text-center border-t border-gray-100">
+        <section className="py-16 px-6 md:px-16 bg-[#faf7f2] text-center border-t border-gray-100">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-light text-slate-800 mb-6 leading-tight">
               Ready to Transform Your Space?
