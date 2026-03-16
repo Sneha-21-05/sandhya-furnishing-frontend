@@ -21,6 +21,17 @@ const Login = () => {
     setLoading(true);
 
     try {
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      if (!passwordRegex.test(password)) {
+        setError(
+          "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+        );
+        setLoading(false);
+        return;
+      }
+
       const res = await api.post("/users/login", {
         email,
         password,

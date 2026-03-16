@@ -149,6 +149,13 @@ const Checkout = () => {
       });
     }
 
+    if (/\d/.test(shipping.firstName) || /\d/.test(shipping.lastName)) {
+      return setPopup({
+        show: true,
+        message: "Name cannot contain numbers.",
+      });
+    }
+
     if (!phoneRegex.test(shipping.phone)) {
       return setPopup({
         show: true,

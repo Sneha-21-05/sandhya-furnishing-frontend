@@ -50,6 +50,18 @@ const Signup = () => {
       return;
     }
 
+    if (/\d/.test(form.name)) {
+      setMessage("Name cannot contain numbers.");
+      setMessageType("error");
+      return;
+    }
+
+    if (!/^\d{10}$/.test(form.phone)) {
+      setMessage("Phone number must be exactly 10 digits.");
+      setMessageType("error");
+      return;
+    }
+
     if (!passwordRegex.test(form.password)) {
       setMessage(
         "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
