@@ -196,7 +196,7 @@ const CurtainsDetails = () => {
 
           {/* IMAGE GALLERY */}
           <div className="w-full h-full flex flex-col justify-start">
-            <ImageGallery images={product.images?.map(getImageUrl) || []} />
+            <ImageGallery images={[...(product.images || []), ...(product.dimensionImages || [])]} />
           </div>
 
           {/* PRODUCT INFO */}
@@ -370,28 +370,6 @@ const CurtainsDetails = () => {
             )}
           </div>
 
-          {/* DIMENSION IMAGES */}
-          {dimensionImages.length > 0 && (
-            <div className="bg-[#142C2C] rounded-[2rem] shadow-xl p-8 text-white relative overflow-hidden group h-max">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
-
-              <h2 className="text-xl font-bold mb-6 flex items-center gap-3 relative z-10">
-                <span className="w-8 h-1 bg-[#9B804E] rounded-full"></span> Dimensions
-              </h2>
-
-              <div className="space-y-4 relative z-10">
-                {dimensionImages.map((img, index) => (
-                  <div key={index} className="bg-white/5 rounded-2xl p-4 border border-white/10">
-                    <img
-                      src={img}
-                      alt="Dimension"
-                      className="w-full max-h-[350px] object-contain rounded-lg filter opacity-90 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
         </section>
 
         {/* ================= RELATED ================= */}

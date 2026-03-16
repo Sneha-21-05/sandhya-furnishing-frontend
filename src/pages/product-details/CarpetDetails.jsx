@@ -126,7 +126,7 @@ const CarpetDetails = () => {
 
           {/* IMAGES */}
           <div>
-            <ImageGallery images={product.images?.map(getImageUrl) || []} />
+            <ImageGallery images={[...(product.images || []), ...(product.dimensionImages || [])]} />
           </div>
 
           {/* RIGHT SIDE */}
@@ -262,32 +262,6 @@ const CarpetDetails = () => {
             </div>
           </div>
 
-          {/* DIMENSION IMAGES */}
-          {dimensionImages.length > 0 ? (
-            <div className="bg-[#142C2C] text-white rounded-3xl p-10 flex flex-col shadow-xl">
-              <h2 className="text-2xl font-bold mb-8">Measurements</h2>
-
-              <div className="relative z-10 w-full flex-1">
-                <div className={`grid gap-6 ${dimensionImages.length === 1 ? 'grid-cols-1' : dimensionImages.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
-                  {dimensionImages.map((img, idx) => (
-                    <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 flex items-center justify-center">
-                      <img
-                        src={img}
-                        alt={`Dimension ${idx + 1}`}
-                        className="w-full h-auto max-h-[300px] object-contain rounded-lg filter drop-shadow-2xl opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-500 ease-out cursor-pointer"
-                        onClick={() => window.open(img, '_blank')}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="bg-white border rounded-3xl flex flex-col items-center justify-center min-h-[350px] p-10 text-center">
-              <RefreshCw size={40} className="text-gray-300 mb-4" />
-              <p className="text-gray-500 font-medium">Dimension schema currently unavailable</p>
-            </div>
-          )}
         </section>
 
         {/* RELATED */}

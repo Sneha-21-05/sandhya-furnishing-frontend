@@ -182,7 +182,7 @@ const WoodenFlooringDetails = () => {
 
           {/* IMAGE GALLERY */}
           <div className="w-full h-full flex flex-col justify-start">
-            <ImageGallery images={images} />
+            <ImageGallery images={[...images, ...(product.dimensionImages?.map(getImageUrl) || [])]} />
           </div>
 
           {/* SUMMARY */}

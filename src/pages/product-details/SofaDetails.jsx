@@ -245,7 +245,7 @@ const SofaDetails = () => {
 
           {/* IMAGE GALLERY */}
           <div className="w-full h-full flex flex-col justify-start">
-            <ImageGallery images={product.images?.map(getImageUrl) || []} />
+            <ImageGallery images={[...(product.images || []), ...(product.dimensionImages || [])]} />
           </div>
 
           {/* PRODUCT INFO */}
@@ -407,38 +407,6 @@ const SofaDetails = () => {
               </div>
             )}
           </div>
-
-          {/* DIMENSION IMAGES */}
-          {dimensionImages.length > 0 ? (
-            <div className="bg-[#142C2C] rounded-[2rem] shadow-[0_8px_30px_rgba(20,44,44,0.15)] p-8 sm:p-10 text-white relative overflow-hidden group flex flex-col">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-[#9B804E]/20 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none transition-transform duration-700 group-hover:scale-110"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none"></div>
-
-              <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 relative z-10">
-                <span className="w-6 h-1 bg-[#9B804E] rounded-full"></span> Measurements
-              </h2>
-
-              <div className="relative z-10 w-full flex-1">
-                <div className={`grid gap-6 ${dimensionImages.length === 1 ? 'grid-cols-1' : dimensionImages.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
-                  {dimensionImages.map((img, idx) => (
-                    <div key={idx} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 flex items-center justify-center">
-                      <img
-                        src={img}
-                        alt={`Dimension ${idx + 1}`}
-                        className="w-full h-auto max-h-[300px] object-contain rounded-lg filter drop-shadow-2xl opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-500 ease-out cursor-pointer"
-                        onClick={() => window.open(img, '_blank')}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="bg-white rounded-[2rem] border-2 border-dashed border-gray-200 flex flex-col items-center justify-center p-10 text-center shadow-[0_8px_30px_rgba(0,0,0,0.02)] min-h-[400px]">
-              <RefreshCw size={48} className="text-gray-300 mb-4" />
-              <p className="text-gray-500 font-medium">Dimension schema currently unavailable</p>
-            </div>
-          )}
 
         </section>
 
