@@ -183,27 +183,8 @@ const WoodenFlooringDetails = () => {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 bg-white p-6 sm:p-10 rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
 
           {/* IMAGE GALLERY */}
-          <div className="w-full h-full flex flex-col justify-start gap-8">
+          <div className="w-full h-full flex flex-col justify-start">
             <ImageGallery images={images} />
-
-            {/* TECHNICAL SPECIFICATIONS */}
-            <section className="relative overflow-hidden bg-white/50 rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max">
-              <div className="absolute top-0 left-0 w-2.5 h-full bg-[#0a2328]" />
-              <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10 relative z-10">
-                Technical Specifications
-              </h2>
-
-              <div className="grid grid-cols-2 gap-y-10 gap-x-6">
-                <DetailRow label="Flooring Type" value={product.type?.type_name} />
-                <DetailRow label="Wood/Core" value={extra.woodType} />
-                <DetailRow label="Dimensions" value={extra.thickness || extra.plankWidth || extra.plankLength ? `${extra.thickness ? extra.thickness + ' Thick, ' : ''}${extra.plankWidth ? extra.plankWidth + 'W x ' : ''}${extra.plankLength ? extra.plankLength + 'L' : ''}` : "Standard"} />
-                <DetailRow label="Finish" value={extra.finish} />
-                <DetailRow label="Installation" value={extra.installationMethod} />
-                <DetailRow label="Durability" value={extra.durabilityUsage} />
-                <DetailRow label="Resistance" value={extra.resistance} />
-                <DetailRow label="Maintenance" value={extra.care} />
-              </div>
-            </section>
           </div>
 
           {/* SUMMARY */}
@@ -305,19 +286,43 @@ const WoodenFlooringDetails = () => {
               </div>
             </div>
 
-            {/* DIMENSION IMAGES GALLERY */}
-            {dimensionImages.length > 0 && (
-              <div className="mt-8 pt-8 border-t border-gray-100">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
-                  <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">Measurements & Layout Reference</span>
-                </div>
-                <div className="bg-white rounded-[1.5rem] border border-gray-100 p-4 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-                  <ImageGallery images={dimensionImages} />
-                </div>
-              </div>
-            )}
           </div>
+        </section>
+
+        {/* ================= DETAILS & DIMENSIONS ================= */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          {/* TECHNICAL SPECIFICATIONS */}
+          <div className="relative overflow-hidden bg-white rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max shadow-sm">
+            <div className="absolute top-0 left-0 w-2.5 h-full bg-[#0a2328]" />
+            <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10 relative z-10">
+              Technical Specifications
+            </h2>
+
+            <div className="grid grid-cols-2 gap-y-10 gap-x-6">
+              <DetailRow label="Flooring Type" value={product.type?.type_name} />
+              <DetailRow label="Wood/Core" value={extra.woodType} />
+              <DetailRow label="Dimensions" value={extra.thickness || extra.plankWidth || extra.plankLength ? `${extra.thickness ? extra.thickness + ' Thick, ' : ''}${extra.plankWidth ? extra.plankWidth + 'W x ' : ''}${extra.plankLength ? extra.plankLength + 'L' : ''}` : "Standard"} />
+              <DetailRow label="Finish" value={extra.finish} />
+              <DetailRow label="Installation" value={extra.installationMethod} />
+              <DetailRow label="Durability" value={extra.durabilityUsage} />
+              <DetailRow label="Resistance" value={extra.resistance} />
+              <DetailRow label="Maintenance" value={extra.care} />
+            </div>
+          </div>
+
+          {/* DIMENSION IMAGES GALLERY */}
+          {dimensionImages.length > 0 && (
+            <div className="bg-white rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max shadow-sm overflow-hidden">
+              <div className="flex items-center gap-2 mb-8">
+                <div className="w-2 h-2 rounded-full bg-[#0a2328]"></div>
+                <h2 className="text-xl font-extrabold tracking-[0.05em] text-[#0a2328] uppercase">Measurements & Layout Reference</h2>
+              </div>
+              <div className="rounded-[1.5rem] border border-gray-100 overflow-hidden">
+                <ImageGallery images={dimensionImages} />
+              </div>
+            </div>
+          )}
+
         </section>
 
 

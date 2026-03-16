@@ -195,42 +195,8 @@ const CurtainsDetails = () => {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 bg-white p-6 sm:p-10 rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
 
           {/* IMAGE GALLERY */}
-          <div className="w-full h-full flex flex-col justify-start gap-8">
+          <div className="w-full h-full flex flex-col justify-start">
             <ImageGallery images={product.images?.map(getImageUrl) || []} />
-
-            {/* PRODUCT DETAILS */}
-            <div className="relative overflow-hidden bg-white/50 rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max">
-              <div className="absolute top-0 left-0 w-2.5 h-full bg-[#0a2328]" />
-              <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10 relative z-10">
-                Detailed Specifications
-              </h2>
-
-              <div className="grid grid-cols-2 gap-y-10 gap-x-6">
-                {product.extraFields?.fabricType && <DetailRow label="Fabric" value={product.extraFields.fabricType} />}
-                {product.extraFields?.transparency && <DetailRow label="Transparency" value={product.extraFields.transparency} />}
-                {product.extraFields?.pattern && <DetailRow label="Pattern" value={product.extraFields.pattern} />}
-                {product.extraFields?.color && <DetailRow label="Color" value={product.extraFields.color} />}
-                {product.extraFields?.lining && <DetailRow label="Lining" value={product.extraFields.lining} />}
-                {product.extraFields?.stitchingType && <DetailRow label="Stitching" value={product.extraFields.stitchingType} />}
-                {product.extraFields?.defaultSize && <DetailRow label="Size" value={product.extraFields.defaultSize} />}
-                {product.extraFields?.installationType && <DetailRow label="Installation" value={product.extraFields.installationType} />}
-                {product.extraFields?.installationCharges && <DetailRow label="Install Charge" value={`₹${product.extraFields.installationCharges}`} />}
-                {product.extraFields?.careInstructions && <DetailRow label="Care" value={product.extraFields.careInstructions} />}
-                {product.extraFields?.customSizeAvailable && <DetailRow label="Custom Size" value="Available" />}
-              </div>
-
-              {product.extraFields?.extraNote && (
-                <div className="mt-10 pt-10 border-t border-gray-50">
-                  <div className="flex items-center gap-2 mb-5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
-                    <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">ADDITIONAL FEATURES</span>
-                  </div>
-                  <div className="bg-[#fafafa] border border-gray-100 rounded-2xl p-6 text-[14px] text-gray-600 leading-relaxed font-medium">
-                    {product.extraFields.extraNote}
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
 
           {/* PRODUCT INFO */}
@@ -364,23 +330,60 @@ const CurtainsDetails = () => {
               </div>
             </div>
 
-            {/* DIMENSION IMAGES GALLERY */}
-            {dimensionImages.length > 0 && (
-              <div className="mt-8 pt-8 border-t border-gray-100">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
-                  <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">Measurements & Dimensions</span>
-                </div>
-                <div className="bg-white rounded-[1.5rem] border border-gray-100 p-4 shadow-sm">
-                  <ImageGallery images={dimensionImages} />
-                </div>
-              </div>
-            )}
-
           </div>
         </section>
 
+        {/* ================= DETAILS & DIMENSIONS ================= */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
+          {/* PRODUCT DETAILS */}
+          <div className="relative overflow-hidden bg-white rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max shadow-sm">
+            <div className="absolute top-0 left-0 w-2.5 h-full bg-[#0a2328]" />
+            <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10 relative z-10">
+              Detailed Specifications
+            </h2>
+
+            <div className="grid grid-cols-2 gap-y-10 gap-x-6">
+              {product.extraFields?.fabricType && <DetailRow label="Fabric" value={product.extraFields.fabricType} />}
+              {product.extraFields?.transparency && <DetailRow label="Transparency" value={product.extraFields.transparency} />}
+              {product.extraFields?.pattern && <DetailRow label="Pattern" value={product.extraFields.pattern} />}
+              {product.extraFields?.color && <DetailRow label="Color" value={product.extraFields.color} />}
+              {product.extraFields?.lining && <DetailRow label="Lining" value={product.extraFields.lining} />}
+              {product.extraFields?.stitchingType && <DetailRow label="Stitching" value={product.extraFields.stitchingType} />}
+              {product.extraFields?.defaultSize && <DetailRow label="Size" value={product.extraFields.defaultSize} />}
+              {product.extraFields?.installationType && <DetailRow label="Installation" value={product.extraFields.installationType} />}
+              {product.extraFields?.installationCharges && <DetailRow label="Install Charge" value={`₹${product.extraFields.installationCharges}`} />}
+              {product.extraFields?.careInstructions && <DetailRow label="Care" value={product.extraFields.careInstructions} />}
+              {product.extraFields?.customSizeAvailable && <DetailRow label="Custom Size" value="Available" />}
+            </div>
+
+            {product.extraFields?.extraNote && (
+              <div className="mt-10 pt-10 border-t border-gray-50">
+                <div className="flex items-center gap-2 mb-5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
+                  <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">ADDITIONAL FEATURES</span>
+                </div>
+                <div className="bg-[#fafafa] border border-gray-100 rounded-2xl p-6 text-[14px] text-gray-600 leading-relaxed font-medium">
+                  {product.extraFields.extraNote}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* DIMENSION IMAGES GALLERY */}
+          {dimensionImages.length > 0 && (
+            <div className="bg-white rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max shadow-sm overflow-hidden">
+              <div className="flex items-center gap-2 mb-8">
+                <div className="w-2 h-2 rounded-full bg-[#0a2328]"></div>
+                <h2 className="text-xl font-extrabold tracking-[0.05em] text-[#0a2328] uppercase">Measurements & Dimensions</h2>
+              </div>
+              <div className="rounded-[1.5rem] border border-gray-100 overflow-hidden">
+                <ImageGallery images={dimensionImages} />
+              </div>
+            </div>
+          )}
+
+        </section>
 
         {/* ================= RELATED ================= */}
         <section className="pt-10">
