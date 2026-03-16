@@ -4,7 +4,8 @@ import { NavLink, useLocation } from "react-router-dom";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const hiddenPages = ["/", "/services", "/login", "/signup"];
+  const isHomePage = hiddenPages.includes(location.pathname);
 
   const linkStyle = ({ isActive }) =>
     isActive
