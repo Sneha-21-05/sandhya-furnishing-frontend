@@ -182,8 +182,44 @@ const PillowsDetails = () => {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
 
           {/* IMAGES */}
-          <div className="w-full">
+          <div className="w-full h-full flex flex-col justify-start gap-8">
             <ImageGallery images={product.images?.map(getImageUrl) || []} />
+
+            {/* SPECS */}
+            <div className="relative bg-white/50 rounded-[2rem] border border-gray-100 p-10 h-max">
+              <div className="absolute left-0 top-0 w-2.5 h-full bg-[#0a2328]" />
+
+              <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10">
+                Detailed Specifications
+              </h2>
+
+              <div className="grid grid-cols-2 gap-y-10 gap-x-6">
+
+                {product.extraFields?.pillowType && (
+                  <DetailRow label="Pillow Type" value={product.extraFields.pillowType} />
+                )}
+
+                {product.extraFields?.size && (
+                  <DetailRow label="Size" value={product.extraFields.size} />
+                )}
+
+                {product.extraFields?.weight && (
+                  <DetailRow label="Weight" value={product.extraFields.weight} />
+                )}
+
+                {product.extraFields?.fabricMaterial && (
+                  <DetailRow label="Fabric Material" value={product.extraFields.fabricMaterial} />
+                )}
+
+                {product.extraFields?.fillingMaterial && (
+                  <DetailRow label="Filling Material" value={product.extraFields.fillingMaterial} />
+                )}
+
+                {product.extraFields?.dimensions && (
+                  <DetailRow label="Dimensions (L × W × H)" value={product.extraFields.dimensions} />
+                )}
+              </div>
+            </div>
           </div>
 
           {/* INFO */}
@@ -310,62 +346,23 @@ const PillowsDetails = () => {
                 Easy Returns
               </div>
             </div>
+
+            {/* DIMENSION IMAGES GALLERY */}
+            {dimensionImages.length > 0 && (
+              <div className="mt-8 pt-8 border-t border-gray-100">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
+                  <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">Measurements & Dimensions</span>
+                </div>
+                <div className="bg-white rounded-[1.5rem] border border-gray-100 p-4 shadow-sm">
+                  <ImageGallery images={dimensionImages} />
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* DETAILS SECTION */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          {/* SPECS */}
-          <div className="relative bg-white rounded-[2rem] border border-gray-100 p-10 h-max">
-            <div className="absolute left-0 top-0 w-2.5 h-full bg-[#0a2328]" />
-
-            <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10">
-              Detailed Specifications
-            </h2>
-
-            <div className="grid grid-cols-2 gap-y-10 gap-x-6">
-
-              {product.extraFields?.pillowType && (
-                <DetailRow label="Pillow Type" value={product.extraFields.pillowType} />
-              )}
-
-              {product.extraFields?.size && (
-                <DetailRow label="Size" value={product.extraFields.size} />
-              )}
-
-              {product.extraFields?.weight && (
-                <DetailRow label="Weight" value={product.extraFields.weight} />
-              )}
-
-              {product.extraFields?.fabricMaterial && (
-                <DetailRow label="Fabric Material" value={product.extraFields.fabricMaterial} />
-              )}
-
-              {product.extraFields?.fillingMaterial && (
-                <DetailRow label="Filling Material" value={product.extraFields.fillingMaterial} />
-              )}
-
-              {product.extraFields?.dimensions && (
-                <DetailRow label="Dimensions (L × W × H)" value={product.extraFields.dimensions} />
-              )}
-            </div>
-          </div>
-
-          {/* DIMENSION IMAGES GALLERY */}
-          {dimensionImages.length > 0 && (
-            <div className="mt-8 pt-8 border-t border-gray-100">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
-                <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">Measurements & Dimensions</span>
-              </div>
-              <div className="bg-white rounded-[1.5rem] border border-gray-100 p-4 shadow-sm">
-                <ImageGallery images={dimensionImages} />
-              </div>
-            </div>
-          )}
-
-        </section>
 
         {/* RELATED PRODUCTS */}
         <section>

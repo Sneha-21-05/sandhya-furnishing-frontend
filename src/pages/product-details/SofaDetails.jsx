@@ -244,8 +244,35 @@ const SofaDetails = () => {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-5 sm:p-8 rounded-[1.5rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100">
 
           {/* IMAGE GALLERY */}
-          <div className="w-full h-full flex flex-col justify-start">
+          <div className="w-full h-full flex flex-col justify-start gap-8">
             <ImageGallery images={product.images?.map(getImageUrl) || []} />
+
+            {/* PRODUCT DETAILS */}
+            <div className="relative overflow-hidden bg-white/50 rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max">
+              <div className="absolute top-0 left-0 w-2.5 h-full bg-[#0a2328]" />
+              <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10 relative z-10">
+                Detailed Specifications
+              </h2>
+
+              <div className="grid grid-cols-2 gap-y-10 gap-x-6">
+                {product.extraFields?.size && <DetailRow label="Size" value={product.extraFields.size} />}
+                {product.extraFields?.color && <DetailRow label="Color" value={product.extraFields.color} />}
+                {product.extraFields?.fabric && <DetailRow label="Fabric" value={product.extraFields.fabric} />}
+                {product.extraFields?.warranty && <DetailRow label="Warranty" value={product.extraFields.warranty} />}
+              </div>
+
+              {product.extraFields?.extraNote && (
+                <div className="mt-10 pt-10 border-t border-gray-50">
+                  <div className="flex items-center gap-2 mb-5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
+                    <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">ADDITIONAL FEATURES</span>
+                  </div>
+                  <div className="bg-[#fafafa] border border-gray-100 rounded-2xl p-6 text-[14px] text-gray-600 leading-relaxed font-medium">
+                    {product.extraFields.extraNote}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* PRODUCT INFO */}
@@ -389,39 +416,7 @@ const SofaDetails = () => {
           </div>
         </section>
 
-        {/* ================= DETAILS + DIMENSIONS ================= */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          {/* PRODUCT DETAILS */}
-          <div className="relative overflow-hidden bg-white rounded-[2rem] border border-gray-100 p-8 sm:p-10 h-max">
-            <div className="absolute top-0 left-0 w-2.5 h-full bg-[#0a2328]" />
-            <h2 className="text-2xl font-extrabold text-[#0a2328] mb-10 relative z-10">
-              Detailed Specifications
-            </h2>
-
-            <div className="grid grid-cols-2 gap-y-10 gap-x-6">
-
-              {product.extraFields?.size && <DetailRow label="Size" value={product.extraFields.size} />}
-              {product.extraFields?.color && <DetailRow label="Color" value={product.extraFields.color} />}
-              {product.extraFields?.fabric && <DetailRow label="Fabric" value={product.extraFields.fabric} />}
-              {product.extraFields?.warranty && <DetailRow label="Warranty" value={product.extraFields.warranty} />}
-
-            </div>
-
-            {product.extraFields?.extraNote && (
-              <div className="mt-10 pt-10 border-t border-gray-50">
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0a2328]"></div>
-                  <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#0a2328]">ADDITIONAL FEATURES</span>
-                </div>
-                <div className="bg-[#fafafa] border border-gray-100 rounded-2xl p-6 text-[14px] text-gray-600 leading-relaxed font-medium">
-                  {product.extraFields.extraNote}
-                </div>
-              </div>
-            )}
-          </div>
-
-        </section>
 
         {/* ================= RELATED ================= */}
         <section className="pt-10">
