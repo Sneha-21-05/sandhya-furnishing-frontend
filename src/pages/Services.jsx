@@ -121,8 +121,43 @@ const Services = () => {
           </div>
         </section>
 
+
+        {/* ================= ALL SERVICES LISTING ================= */}
+        <section className="bg-white py-24 px-6 md:px-16 text-slate-800 border-t border-gray-100">
+          <div className="max-w-7xl mx-auto">
+             <div className="text-center mb-16">
+              <p className="text-blue-600 font-semibold tracking-widest uppercase text-sm mb-2">Our Expertise</p>
+              <h2 className="text-3xl md:text-5xl font-light tracking-wide text-slate-900">
+                Comprehensive Services
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               {[
+                 { title: "Custom Sofas", desc: "Tailor-made sofas designed specifically for your space, style, and comfort preferences.", icon: "🛋️" },
+                 { title: "Curtains & Blinds", desc: "Expert window styling with premium fabrics, custom measurements, and professional installation.", icon: "🪟" },
+                 { title: "Premium Mattresses", desc: "High-quality, durable mattresses sourced and recommended based on your sleep needs.", icon: "🛏️" },
+                 { title: "Upholstery Services", desc: "Breathe new life into your old furniture with our expert reupholstery and repair services.", icon: "🪡" },
+                 { title: "Cushions & Pillows", desc: "Custom decorative cushions and comfortable sleeping pillows made to order.", icon: "🧵" },
+                 { title: "Cotton Gaddas", desc: "Traditional, hand-crafted pure cotton gaddas (floor mattresses) for authentic comfort.", icon: "🧶" },
+                 { title: "Headboards & Beds", desc: "Custom upholstered headboards and bed frames to complete your bedroom aesthetic.", icon: "🛏️" },
+                 { title: "Space Consultation", desc: "Professional at-home design consultation to help you choose the right fabrics and styles.", icon: "📐" },
+                 { title: "Professional Installation", desc: "Flawless, hassle-free delivery and installation of all our furnishing products.", icon: "🛠️" }
+               ].map((service, index) => (
+                  <div key={index} className="bg-slate-50 rounded-2xl p-8 hover:bg-slate-900 hover:text-white transition-colors duration-500 group border border-gray-100">
+                    <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{service.icon}</div>
+                    <h3 className="text-xl font-medium mb-3 group-hover:text-blue-400 transition-colors">{service.title}</h3>
+                    <p className="text-gray-500 group-hover:text-gray-300 font-light leading-relaxed">
+                      {service.desc}
+                    </p>
+                  </div>
+               ))}
+            </div>
+          </div>
+        </section>
+
         {/* ================= CTA SECTION ================= */}
-        <section className="py-24 px-6 md:px-16 bg-[#faf7f2] text-center">
+        <section className="py-24 px-6 md:px-16 bg-[#faf7f2] text-center border-t border-gray-100">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-light text-slate-800 mb-6 leading-tight">
               Ready to Transform Your Space?
