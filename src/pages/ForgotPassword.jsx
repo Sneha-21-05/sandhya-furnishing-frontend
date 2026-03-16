@@ -133,28 +133,55 @@ const ForgotPassword = () => {
                                     required
                                 />
 
-                                <input
-                                    type="password"
-                                    placeholder="New Password"
-                                    className="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
-                                    value={newPassword}
-                                    onChange={(e) => setNewPassword(e.target.value)}
-                                    required
-                                />
+                                <div>
+                                    <input
+                                        type="password"
+                                        placeholder="New Password"
+                                        className="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        required
+                                    />
+                                    {newPassword && (
+                                        <div className="mt-3 text-xs space-y-1.5 px-2">
+                                            <p className={`flex items-center gap-2 ${newPassword.length >= 8 ? 'text-green-600' : 'text-gray-500'}`}>
+                                                <span className={`w-1.5 h-1.5 rounded-full ${newPassword.length >= 8 ? 'bg-green-500' : 'bg-gray-300'}`}></span> At least 8 characters
+                                            </p>
+                                            <p className={`flex items-center gap-2 ${/[A-Z]/.test(newPassword) && /[a-z]/.test(newPassword) ? 'text-green-600' : 'text-gray-500'}`}>
+                                                <span className={`w-1.5 h-1.5 rounded-full ${/[A-Z]/.test(newPassword) && /[a-z]/.test(newPassword) ? 'bg-green-500' : 'bg-gray-300'}`}></span> Uppercase & lowercase letters
+                                            </p>
+                                            <p className={`flex items-center gap-2 ${/\d/.test(newPassword) ? 'text-green-600' : 'text-gray-500'}`}>
+                                                <span className={`w-1.5 h-1.5 rounded-full ${/\d/.test(newPassword) ? 'bg-green-500' : 'bg-gray-300'}`}></span> At least one number
+                                            </p>
+                                            <p className={`flex items-center gap-2 ${/[!@#$%^&*(),.?":{}|<>]/.test(newPassword) ? 'text-green-600' : 'text-gray-500'}`}>
+                                                <span className={`w-1.5 h-1.5 rounded-full ${/[!@#$%^&*(),.?":{}|<>]/.test(newPassword) ? 'bg-green-500' : 'bg-gray-300'}`}></span> At least one special character
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
 
-                                <input
-                                    type="password"
-                                    placeholder="Confirm New Password"
-                                    className="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all"
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    required
-                                />
+                                <div>
+                                    <input
+                                        type="password"
+                                        placeholder="Confirm New Password"
+                                        className={`w-full bg-slate-50 border p-4 rounded-xl focus:ring-2 focus:outline-none transition-all ${
+                                            confirmPassword && newPassword !== confirmPassword 
+                                            ? 'border-red-300 focus:ring-red-500' 
+                                            : 'border-slate-200 focus:ring-blue-500 focus:bg-white'
+                                        }`}
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        required
+                                    />
+                                    {confirmPassword && newPassword !== confirmPassword && (
+                                        <p className="text-red-500 text-xs mt-2 px-2">Passwords do not match.</p>
+                                    )}
+                                </div>
 
                                 <button
                                     type="submit"
-                                    disabled={loading}
-                                    className="w-full py-4 mt-6 bg-slate-900 hover:bg-blue-600 text-white rounded-xl font-medium transition-all duration-300 disabled:opacity-70"
+                                    disabled={loading || newPassword.length < 8 || !/[A-Z]/.test(newPassword) || !/[a-z]/.test(newPassword) || !/\d/.test(newPassword) || !/[!@#$%^&*(),.?":{}|<>]/.test(newPassword) || newPassword !== confirmPassword}
+                                    className="w-full py-4 mt-6 bg-slate-900 hover:bg-blue-600 text-white rounded-xl font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {loading ? "Resetting Password..." : "Confirm Password Reset"}
                                 </button>
